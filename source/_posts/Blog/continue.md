@@ -163,12 +163,12 @@ curl -X POST http://127.0.0.1:11435/api/generate -d '{
 
 1. `Ctrl + L`选中代码，弹出聊天窗口，可以直接询问LLM，例如编写单元测试，检查bug。
 
-   ![image-20240402195237473](../../img/continue/image-20240402195031626.png)
+   ![image-20240402195237473](/img/continue/image-20240402195031626.png)
 
 2. `Ctrl + I`插入代码，弹出`prompt`输入框，根据需求生成代码。
 
-   ![image-20240402195237473](../../img/continue/image-20240402195237473.png)
+   ![image-20240402195237473](/img/continue/image-20240402195237473.png)
 
 
 
-![image-20240402195249229](../../img/continue/image-20240402195249229.png)
+![image-20240402195249229](/img/continue/image-20240402195249229.png)

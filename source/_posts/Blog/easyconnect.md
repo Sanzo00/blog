@@ -118,7 +118,7 @@ docker run \
 
 ip: `127.0.0.1:5901`, passed: `ecconnect`.
 
-![image-20241003110329733](../../img/Blog/easyconnect/image-20241003110329733.png)
+![image-20241003110329733](/img/Blog/easyconnect/image-20241003110329733.png)
 
 
 

@@ -4,7 +4,7 @@ katex: true
 typora-copy-images-to: ..\..\img\
 date: 2021-07-07 22:24:52
 updated: 2021-07-07 22:24:52
-sticky: 0
+sticky: 2
 tags:
 	- pi
 	- RaspberryPi
@@ -25,15 +25,15 @@ toc: true
 
 代码地址：[github.com/Sanzo00/pi-car](https://github.com/Sanzo00/pi-car)
 
-树莓派配置：[sanzo.top/RaspberryPi/raspi-setup](https://sanzo.top/RaspberryPi/raspi-setup)
+树莓派配置：[sanzo.top/blog/Blog/raspi-setup](https://sanzo.top/blog/Blog/raspi-setup)
 
-![](../../img/Blog/raspi-car/car.jpg)
+![](/img/Blog/raspi-car/car.jpg)
 
 ## 功能展示
 
 ### 远程控制小车
 
-![](../../img/Blog/raspi-car/remote-control-car.gif)
+![](/img/Blog/raspi-car/remote-control-car.gif)
 
 
 
@@ -45,7 +45,7 @@ toc: true
 
 小车在低电压情况下跑的比较慢，因此增加变速的功能。
 
-![](../../img/Blog/raspi-car/pwm-speed-control.png)
+![](/img/Blog/raspi-car/pwm-speed-control.png)
 
 
 
@@ -53,15 +53,15 @@ toc: true
 
 这里使用超声波测距模块（HC-SR04）实现距离检测，在此基础上实现一个简单的自动避障逻辑。
 
-![](../../img/Blog/raspi-car/auto-direction.gif)
+![](/img/Blog/raspi-car/auto-direction.gif)
 
 
 
 ## GPIO
 
-![image-20201206142156793](../../img/Blog/raspi-car/image-20201206142156793.png)
+![image-20201206142156793](/img/Blog/raspi-car/image-20201206142156793.png)
 
-![image-20201206142137327](../../img/Blog/raspi-car/image-20201206142137327.png)
+![image-20201206142137327](/img/Blog/raspi-car/image-20201206142137327.png)
 
 ### pinout
 
@@ -72,7 +72,7 @@ pinout
 
 
 
-![image-20201206142521859](../../img/Blog/raspi-car/image-20201206142521859.png)
+![image-20201206142521859](/img/Blog/raspi-car/image-20201206142521859.png)
 
 
 
@@ -83,7 +83,7 @@ wget https://project-downloads.drogon.net/wiringpi-latest.deb
 sudo dpkg -i wiringpi-latest.deb
 ```
 
-![image-20201206144158864](../../img/Blog/raspi-car/image-20201206144158864.png)
+![image-20201206144158864](/img/Blog/raspi-car/image-20201206144158864.png)
 
 
 
@@ -104,9 +104,9 @@ sudo dpkg -i wiringpi-latest.deb
 
 ### L298N
 
-![image-20210820111534273](../../img/Blog/raspi-car/image-20210820111534273.png)
+![image-20210820111534273](/img/Blog/raspi-car/image-20210820111534273.png)
 
-![image-20201206145217171](../../img/Blog/raspi-car/image-20201206145217171.png)
+![image-20201206145217171](/img/Blog/raspi-car/image-20201206145217171.png)
 
 > 接线
 
@@ -120,7 +120,7 @@ ENA、ENB接到树莓派的20、21。
 
 ### HC-SR04
 
-![image-20210820110650933](../../img/Blog/raspi-car/image-20210820110650933.png)
+![image-20210820110650933](/img/Blog/raspi-car/image-20210820110650933.png)
 
 > 测距原理
 

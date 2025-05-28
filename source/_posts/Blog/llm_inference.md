@@ -58,7 +58,7 @@ LLM Application是使用LLM来完成特定的任务（摘要，搜索，代码�
 
 
 
-![现有推理服务 vs. Parrot推理服务](../../img/Blog/llm-inference/image-20240919165122842.png)
+![现有推理服务 vs. Parrot推理服务](/img/Blog/llm-inference/image-20240919165122842.png)
 
 
 

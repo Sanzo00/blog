@@ -26,7 +26,7 @@ RAG是什么？目前的研究现状如何？
 
 大语言模型（Large Language Model，LLM）是基于海量数据集进行预训练的超大规模的深度学习模型。OpenAI发布的ChatGPT使人们意识到，具有**足够的训练数据**和**巨大的参数**的神经网络模型可以捕获人类语言的大部分语法和语义。得益于与LLM出色的语言理解能力，LLM被广泛的应用于各种下游任务，例如文案写作，知识问答，文本分类，代码生成，文本生成等。虽然LLM在很多领域具有出色的表现，但是它面临诸如**幻觉**，**过时的知识**，**缺乏可解释性**等挑战。
 
-![图1：RAG执行流程 （from RAGCache paper）](../../img/Blog/rag/image-20240909144939668.png)
+![图1：RAG执行流程 （from RAGCache paper）](/img/Blog/rag/image-20240909144939668.png)
 
 
 
@@ -42,7 +42,7 @@ RAG是什么？目前的研究现状如何？
 
 
 
-![图2: VectorRAG](../../img/Blog/rag/image-20240225165419089.png)
+![图2: VectorRAG](/img/Blog/rag/image-20240225165419089.png)
 
 **VectorRAG使用向量来组织外部的知识**。如图2所示，VectorRAG首先将文档划分为多个文本块（chunk）。每个文本块通过嵌入模型得到对应的向量表示，然后存储到向量数据库中。对于用的的请求，VectorRAG对用户的问题生成嵌入向量。然后，从向量数据库检索与问题嵌入向量相似的向量并返回对应的文本块。
 
@@ -64,7 +64,7 @@ VectorRAG的缺点是：（1）由于信息分散导致的检索不完整性。�
 
 GraphRAG是一种使用知识图谱（Knowledge Graph，KG）来组织外部数据的RAG。与向量RAG相比，GraphRAG具有更加细粒度的知识形式，而且，通过在图上查询目标实体的多跳邻居，可以查询相互关联的信息，即使他们不在同一个文本块内部。
 
-![图3: GraphRAG](../../img/Blog/rag/image-20240228095958676.png)
+![图3: GraphRAG](/img/Blog/rag/image-20240228095958676.png)
 
 
 
@@ -76,7 +76,7 @@ GraphRAG的执行过程可以简单概括为以下三步：
 
 
 
-![图4: Graph + VectorRAG (siwei.io/graph-rag)](../../img/Blog/rag/image-20240226142933094.png)
+![图4: Graph + VectorRAG (siwei.io/graph-rag)](/img/Blog/rag/image-20240226142933094.png)
 
 
 
@@ -112,7 +112,7 @@ GraphRAG可以看作是对已有方法的额外扩展。通过将知识图谱引
 
 
 
-![RAG在不同上下文长度下的表现](../../img/Blog/rag/image-20240909152853006.png)
+![RAG在不同上下文长度下的表现](/img/Blog/rag/image-20240909152853006.png)
 
 
 

@@ -38,7 +38,7 @@ $ \begin{vmatrix} a_{11} & a_{12} & a_{13} \\  a_{21} & a_{22} & a_{23} \\ a_{31
 </div>
 
 
-![image-20210111133613519](../../img/Blog/LinearAlgebra/image-20210111133613519.png)
+![image-20210111133613519](/img/Blog/LinearAlgebra/image-20210111133613519.png)
 
 
 
@@ -50,7 +50,7 @@ $ \begin{vmatrix} a_{11} & a_{12} & a_{13} \\  a_{21} & a_{22} & a_{23} \\ a_{31
 
 $n$阶行列式，把第$a_{ij}$所在的行列删除，留下的$n-1$阶行列式称为余子式，记为$M_{ij}$。
 
-![image-20210111133933964](../../img/Blog/LinearAlgebra/image-20210111133933964.png)
+![image-20210111133933964](/img/Blog/LinearAlgebra/image-20210111133933964.png)
 
 
 
@@ -134,7 +134,7 @@ $\begin{bmatrix}
 </div>
 
 
-![image-20200919202730552](../../img/Blog/LinearAlgebra/image-20200919202730552.png)
+![image-20200919202730552](/img/Blog/LinearAlgebra/image-20200919202730552.png)
 
 
 
@@ -150,7 +150,7 @@ $2\begin{bmatrix}
 </div>
 
 
-![image-20200919202902807](../../img/Blog/LinearAlgebra/image-20200919202902807.png)
+![image-20200919202902807](/img/Blog/LinearAlgebra/image-20200919202902807.png)
 
 
 
@@ -203,7 +203,7 @@ $2\begin{bmatrix}
 
 
 
-![image-20200919212207688](../../img/Blog/LinearAlgebra/image-20200919212207688.png)
+![image-20200919212207688](/img/Blog/LinearAlgebra/image-20200919212207688.png)
 
 
 
@@ -275,19 +275,19 @@ $$
    2
   \end{bmatrix}$，通过矩阵的乘法得到变化后的向量。
 
-![image-20200919214800453](../../img/Blog/LinearAlgebra/image-20200919214800453.png)
+![image-20200919214800453](/img/Blog/LinearAlgebra/image-20200919214800453.png)
 
-![image-20200919214828033](../../img/Blog/LinearAlgebra/image-20200919214828033.png)
+![image-20200919214828033](/img/Blog/LinearAlgebra/image-20200919214828033.png)
 
-![image-20200919214904438](../../img/Blog/LinearAlgebra/image-20200919214904438.png)
+![image-20200919214904438](/img/Blog/LinearAlgebra/image-20200919214904438.png)
 
-![image-20200919214934222](../../img/Blog/LinearAlgebra/image-20200919214934222.png)
+![image-20200919214934222](/img/Blog/LinearAlgebra/image-20200919214934222.png)
 
 
 
 如果变化后的$\hat{i}$和$\hat{j}$是线性相关的，变化后向量的张量就是一维空间：
 
-![image-20200919215136876](../../img/Blog/LinearAlgebra/image-20200919215136876.png)
+![image-20200919215136876](/img/Blog/LinearAlgebra/image-20200919215136876.png)
 
 
 
@@ -299,35 +299,35 @@ $$
 
 一个通俗的方法是首先**左乘旋转矩阵**然后**左乘剪切矩阵**。
 
-![image-20200919221913292](../../img/Blog/LinearAlgebra/image-20200919221913292.png)
+![image-20200919221913292](/img/Blog/LinearAlgebra/image-20200919221913292.png)
 
 
 
 两个矩阵的乘积需要从右向左读，类似函数的复合。
 
-![image-20200919221959763](../../img/Blog/LinearAlgebra/image-20200919221959763.png)
+![image-20200919221959763](/img/Blog/LinearAlgebra/image-20200919221959763.png)
 
 
 
 这样两个矩阵的乘积就对应了一个复合的线性变换，最终得到对应变换后的$\hat{i}$和$\hat{j}$。
 
-![image-20200919222849490](../../img/Blog/LinearAlgebra/image-20200919222849490.png)
+![image-20200919222849490](/img/Blog/LinearAlgebra/image-20200919222849490.png)
 
-![image-20200919222936127](../../img/Blog/LinearAlgebra/image-20200919222936127.png)
+![image-20200919222936127](/img/Blog/LinearAlgebra/image-20200919222936127.png)
 
 这一过程具有普适性：
 
-![image-20200919223010638](../../img/Blog/LinearAlgebra/image-20200919223010638.png)
+![image-20200919223010638](/img/Blog/LinearAlgebra/image-20200919223010638.png)
 
 
 
 > 矩阵乘法的顺序
 
-![image-20200919223307428](../../img/Blog/LinearAlgebra/image-20200919223307428.png)
+![image-20200919223307428](/img/Blog/LinearAlgebra/image-20200919223307428.png)
 
-![image-20200919223234205](../../img/Blog/LinearAlgebra/image-20200919223234205.png)
+![image-20200919223234205](/img/Blog/LinearAlgebra/image-20200919223234205.png)
 
-![image-20200919223255780](../../img/Blog/LinearAlgebra/image-20200919223255780.png)
+![image-20200919223255780](/img/Blog/LinearAlgebra/image-20200919223255780.png)
 
 
 
@@ -337,7 +337,7 @@ $(AB)C = A(BC)$
 
 根据线性变化我们可以得出，矩阵的乘法都是以CBA的顺序变换得到，所以他们本质上相同，通过变化的形式解释比代数计算更加容易理解。
 
-![image-20200919223807543](../../img/Blog/LinearAlgebra/image-20200919223807543.png)
+![image-20200919223807543](/img/Blog/LinearAlgebra/image-20200919223807543.png)
 
 
 
@@ -347,13 +347,13 @@ $(AB)C = A(BC)$
 
 三维的空间变化和二维的类似。
 
-![image-20200919231921745](../../img/Blog/LinearAlgebra/image-20200919231921745.png)
+![image-20200919231921745](/img/Blog/LinearAlgebra/image-20200919231921745.png)
 
 
 
 同样跟踪基向量的变换，能很好的解释变换后的向量，同样两个矩阵相乘也是。
 
-![image-20200919233624101](../../img/Blog/LinearAlgebra/image-20200919233624101.png)
+![image-20200919233624101](/img/Blog/LinearAlgebra/image-20200919233624101.png)
 
 
 
@@ -365,25 +365,25 @@ $(AB)C = A(BC)$
 
 单位面积的变换代表任意区域的面积变换比例。
 
-![image-20200920130814473](../../img/Blog/LinearAlgebra/image-20200920130814473.png)
+![image-20200920130814473](/img/Blog/LinearAlgebra/image-20200920130814473.png)
 
-![image-20200920130933473](../../img/Blog/LinearAlgebra/image-20200920130933473.png)
+![image-20200920130933473](/img/Blog/LinearAlgebra/image-20200920130933473.png)
 
-![image-20200920130915512](../../img/Blog/LinearAlgebra/image-20200920130915512.png)
+![image-20200920130915512](/img/Blog/LinearAlgebra/image-20200920130915512.png)
 
 
 
 **行列式的值表示缩放比例。**
 
-![image-20200920131118018](../../img/Blog/LinearAlgebra/image-20200920131118018.png)
+![image-20200920131118018](/img/Blog/LinearAlgebra/image-20200920131118018.png)
 
-![image-20200920131210961](../../img/Blog/LinearAlgebra/image-20200920131210961.png)
+![image-20200920131210961](/img/Blog/LinearAlgebra/image-20200920131210961.png)
 
 
 
 行列式为什么有负值呢？
 
-![](../../img/Blog/LinearAlgebra/GIF-2020-9-2013-22-08.gif)
+![](/img/Blog/LinearAlgebra/GIF-2020-9-2013-22-08.gif)
 
 
 
@@ -391,9 +391,9 @@ $(AB)C = A(BC)$
 
 三位空间的线性变换，可以使用**右手定则**判断三维空间的定向。如果变换前后都可以通过右手定则得到，那么他的行列式就是正值，否则为负值。
 
-![image-20200920132802227](../../img/Blog/LinearAlgebra/image-20200920132802227.png)
+![image-20200920132802227](/img/Blog/LinearAlgebra/image-20200920132802227.png)
 
-![image-20200920132900515](../../img/Blog/LinearAlgebra/image-20200920132900515.png)
+![image-20200920132900515](/img/Blog/LinearAlgebra/image-20200920132900515.png)
 
 
 
@@ -401,17 +401,17 @@ $(AB)C = A(BC)$
 
 二阶行列式
 
-![image-20200920133432426](../../img/Blog/LinearAlgebra/image-20200920133432426.png)
+![image-20200920133432426](/img/Blog/LinearAlgebra/image-20200920133432426.png)
 
 三阶行列式
 
-![image-20200920133410970](../../img/Blog/LinearAlgebra/image-20200920133410970.png)
+![image-20200920133410970](/img/Blog/LinearAlgebra/image-20200920133410970.png)
 
 
 
 二阶行列式中a、d，表示横向和纵向的拉伸，b、c表示对角线的拉伸和压缩的情况。
 
-![image-20200920133555705](../../img/Blog/LinearAlgebra/image-20200920133555705.png)
+![image-20200920133555705](/img/Blog/LinearAlgebra/image-20200920133555705.png)
 
 
 
@@ -419,7 +419,7 @@ $(AB)C = A(BC)$
 
 > 线性方程组
 
-![image-20200920141506454](../../img/Blog/LinearAlgebra/image-20200920141506454.png)
+![image-20200920141506454](/img/Blog/LinearAlgebra/image-20200920141506454.png)
 
 从几何的角度来思考，矩阵A表示一个线性变换，我们需要找到一个$\vec x$使得它在变换后和$\vec v$重合。
 
@@ -472,19 +472,19 @@ $det(A) =0$：空间被压缩到更低的维度，这时不存在逆变换，因
 
 二维空间压缩为一条直线，一条线上的向量都会落到原点。
 
-![](../../img/Blog/LinearAlgebra/GIF-2020-9-20-14-36-18.gif)
+![](/img/Blog/LinearAlgebra/GIF-2020-9-20-14-36-18.gif)
 
 
 
 三维空间压缩为二维平面，一条线上的向量都会落到原点。
 
-![](../../img/Blog/LinearAlgebra/GIF-2020-9-20-14-40-00.gif)
+![](/img/Blog/LinearAlgebra/GIF-2020-9-20-14-40-00.gif)
 
 
 
 三维空间压缩为一条直线，整个平面上的向量都会落到原点。
 
-![](../../img/Blog/LinearAlgebra/GIF-2020-9-20-14-43-07.gif)
+![](/img/Blog/LinearAlgebra/GIF-2020-9-20-14-43-07.gif)
 
 
 
@@ -500,17 +500,17 @@ $det(A) =0$：空间被压缩到更低的维度，这时不存在逆变换，因
 
 一个$3\times2$的矩阵：$\begin{bmatrix}2&0\\-1&1\\-2&1 \end{bmatrix}$它的集合意义是将一个二维空间映射到三维空间上，矩阵有两列表明输入空间有两个基向量，有三行表示每个向量在变换后用三个独立的坐标描述。
 
-![image-20200921204842378](../../img/Blog/LinearAlgebra/image-20200921204842378.png)
+![image-20200921204842378](/img/Blog/LinearAlgebra/image-20200921204842378.png)
 
 一个$2\times 3$的矩阵：$\begin{bmatrix}3&1&4\\1&5&9 \end{bmatrix}$则表示将一个三维空间映射到二维空间上。
 
-![image-20200921204804360](../../img/Blog/LinearAlgebra/image-20200921204804360.png)
+![image-20200921204804360](/img/Blog/LinearAlgebra/image-20200921204804360.png)
 
 
 
 一个$1\times 2$的矩阵：$\begin{bmatrix}1&2 \end{bmatrix}$表示一个二维空间映射到一维空间。
 
-![image-20200921205137915](../../img/Blog/LinearAlgebra/image-20200921205137915.png)
+![image-20200921205137915](/img/Blog/LinearAlgebra/image-20200921205137915.png)
 
 
 
@@ -522,7 +522,7 @@ $det(A) =0$：空间被压缩到更低的维度，这时不存在逆变换，因
 
 点积的几何解释是将一个向量向一个向量投影，然后两个长度相乘，如果为负数则表示反向。
 
-![image-20200921213129723](../../img/Blog/LinearAlgebra/image-20200921213129723.png)
+![image-20200921213129723](/img/Blog/LinearAlgebra/image-20200921213129723.png)
 
 
 
@@ -544,23 +544,23 @@ $det(A) =0$：空间被压缩到更低的维度，这时不存在逆变换，因
 
 假设有一个倾斜的数轴，上面有一个单位向量$\vec v$，对于任意一个向量它在数轴上的投影都是一个数字，这表示了一个二维向量到一位空间的一种线性变换，那么如何得到这个线性变化呢？
 
-![image-20200921215610833](../../img/Blog/LinearAlgebra/image-20200921215610833.png)
+![image-20200921215610833](/img/Blog/LinearAlgebra/image-20200921215610833.png)
 
 
 
 由之前的内容来说，我们可以观察基向量$\vec i$和$\vec j$的变化，从而得到对应的线性变化。
 
-![image-20200921215905156](../../img/Blog/LinearAlgebra/image-20200921215905156.png)
+![image-20200921215905156](/img/Blog/LinearAlgebra/image-20200921215905156.png)
 
 因为$\vec i$、$\vec j$、$\vec u$都是单位向量，根据对称性可以得到$\vec i$和$\vec j$在$\vec u$上的投影长度刚好是$\vec u$的坐标。
 
-![image-20200921220129867](../../img/Blog/LinearAlgebra/image-20200921220129867.png)
+![image-20200921220129867](/img/Blog/LinearAlgebra/image-20200921220129867.png)
 
-![image-20200921220208217](../../img/Blog/LinearAlgebra/image-20200921220208217.png)
+![image-20200921220208217](/img/Blog/LinearAlgebra/image-20200921220208217.png)
 
 这样空间中的所有向量都可以通过线性变化$\begin{bmatrix}u_x&u_y \end{bmatrix}$得到，而这个计算过程刚好和单位向量的点积相同。
 
-![image-20200921220552315](../../img/Blog/LinearAlgebra/image-20200921220552315.png)
+![image-20200921220552315](/img/Blog/LinearAlgebra/image-20200921220552315.png)
 
 也就是为什么向量投影到直线的长度，刚好等于它与直线上单位向量的点积，对于非单位向量也是类似，只是将其扩大到对应倍数。
 
@@ -572,9 +572,9 @@ $det(A) =0$：空间被压缩到更低的维度，这时不存在逆变换，因
 
 考虑到正向，这个面积的值存在负值，这是参照基向量$\vec i$和$\vec j$的相对位置来说的。
 
-![image-20200922102602172](../../img/Blog/LinearAlgebra/image-20200922102602172.png)
+![image-20200922102602172](/img/Blog/LinearAlgebra/image-20200922102602172.png)
 
-![image-20200922102722945](../../img/Blog/LinearAlgebra/image-20200922102722945.png)
+![image-20200922102722945](/img/Blog/LinearAlgebra/image-20200922102722945.png)
 
 
 
@@ -582,13 +582,13 @@ $det(A) =0$：空间被压缩到更低的维度，这时不存在逆变换，因
 
 叉积的反向可以通过右手定则判断：
 
-![image-20200922103452143](../../img/Blog/LinearAlgebra/image-20200922103452143.png)
+![image-20200922103452143](/img/Blog/LinearAlgebra/image-20200922103452143.png)
 
 叉积的计算方法：
 
-![image-20200922103702614](../../img/Blog/LinearAlgebra/image-20200922103702614.png)
+![image-20200922103702614](/img/Blog/LinearAlgebra/image-20200922103702614.png)
 
-![image-20200922103629488](../../img/Blog/LinearAlgebra/image-20200922103629488.png)
+![image-20200922103629488](/img/Blog/LinearAlgebra/image-20200922103629488.png)
 
 
 
@@ -598,33 +598,33 @@ $det(A) =0$：空间被压缩到更低的维度，这时不存在逆变换，因
 
 参考二维向量的叉积计算：
 
-![image-20200922122052167](../../img/Blog/LinearAlgebra/image-20200922122052167.png)
+![image-20200922122052167](/img/Blog/LinearAlgebra/image-20200922122052167.png)
 
 
 
 三维的可以写成类似的形式，但是他并是真正的叉积，不过和真正的叉积已经很接近了。
 
-![image-20200922122142162](../../img/Blog/LinearAlgebra/image-20200922122142162.png)
+![image-20200922122142162](/img/Blog/LinearAlgebra/image-20200922122142162.png)
 
 
 
 我可以构造一个函数，它可以把一个三维空间映射到一维空间上。
 
-![image-20200922122515739](../../img/Blog/LinearAlgebra/image-20200922122515739.png)
+![image-20200922122515739](/img/Blog/LinearAlgebra/image-20200922122515739.png)
 
 右侧行列式是线性的，所以我们可以找到一个线性变换代替这个函数。
 
-![image-20200922122703239](../../img/Blog/LinearAlgebra/image-20200922122703239.png)
+![image-20200922122703239](/img/Blog/LinearAlgebra/image-20200922122703239.png)
 
 根据对偶性的思想，从多维空间到一维空间的线性变换，等于与对应向量的点积，这个特殊的向量$\vec p$就是我们要找的向量。
 
-![image-20200922122835340](../../img/Blog/LinearAlgebra/image-20200922122835340.png)
+![image-20200922122835340](/img/Blog/LinearAlgebra/image-20200922122835340.png)
 
 > 从数值计算上:
 
-![image-20200922123007736](../../img/Blog/LinearAlgebra/image-20200922123007736.png)
+![image-20200922123007736](/img/Blog/LinearAlgebra/image-20200922123007736.png)
 
-![image-20200922123018405](../../img/Blog/LinearAlgebra/image-20200922123018405.png)
+![image-20200922123018405](/img/Blog/LinearAlgebra/image-20200922123018405.png)
 
 向量$\vec p$的计算结果刚好和叉积计算的结果相同。
 
@@ -632,7 +632,7 @@ $det(A) =0$：空间被压缩到更低的维度，这时不存在逆变换，因
 
 > 从几何意义：
 
-![image-20200922122835340](../../img/Blog/LinearAlgebra/image-20200922122835340.png)
+![image-20200922122835340](/img/Blog/LinearAlgebra/image-20200922122835340.png)
 
 当向量$\vec p$和向量$\begin{bmatrix}x\\y\\z \end{bmatrix}$点乘时，得到一个$\begin{bmatrix}x\\y\\z \end{bmatrix}$与$\vec v$与$\vec w$确定的平行六面体的有向体积，什么样的向量满足这个性质呢？
 
@@ -642,9 +642,9 @@ $det(A) =0$：空间被压缩到更低的维度，这时不存在逆变换，因
 
 那么$\vec p$要想满足这一要求，那么它就刚好符合，长度等于$\vec v,\vec w$所围成的面积，且刚好垂直这个平面。
 
-![image-20200922123829003](../../img/Blog/LinearAlgebra/image-20200922123829003.png)
+![image-20200922123829003](/img/Blog/LinearAlgebra/image-20200922123829003.png)
 
-![image-20200922123858594](../../img/Blog/LinearAlgebra/image-20200922123858594.png)
+![image-20200922123858594](/img/Blog/LinearAlgebra/image-20200922123858594.png)
 
 
 
@@ -664,15 +664,15 @@ $det(A) =0$：空间被压缩到更低的维度，这时不存在逆变换，因
 
 在标准坐标系可以跟踪基向量的变化来体现：
 
-![image-20200922133429853](../../img/Blog/LinearAlgebra/image-20200922133429853.png)
+![image-20200922133429853](/img/Blog/LinearAlgebra/image-20200922133429853.png)
 
 在詹妮弗的坐标系中如何表示旋转呢？首先将向量转换为标准坐标系的表示，然后左旋，最后再转换为詹妮弗的表示。
 
-![image-20200922133607455](../../img/Blog/LinearAlgebra/image-20200922133607455.png)
+![image-20200922133607455](/img/Blog/LinearAlgebra/image-20200922133607455.png)
 
 所以我们可以得到对于詹妮弗坐标系的左旋线性变化的表示：
 
-![image-20200922133725994](../../img/Blog/LinearAlgebra/image-20200922133725994.png)
+![image-20200922133725994](/img/Blog/LinearAlgebra/image-20200922133725994.png)
 
 所以表达式$A^{-1}MA$表示一种数学上的转移作用，$M$表示一种线性变换，$A$和$A^{-1}$表示坐标系的转换。
 
@@ -684,17 +684,17 @@ $det(A) =0$：空间被压缩到更低的维度，这时不存在逆变换，因
 
 
 
-![GIF 2020-11-21 17-46-40](../../img/Blog/LinearAlgebra/GIF-2020-11-21-17-46-40.gif)
+![GIF 2020-11-21 17-46-40](/img/Blog/LinearAlgebra/GIF-2020-11-21-17-46-40.gif)
 
 
 
-![image-20200922152146060](../../img/Blog/LinearAlgebra/image-20200922152146060.png)
+![image-20200922152146060](/img/Blog/LinearAlgebra/image-20200922152146060.png)
 
 
 
 一个三维空间的旋转，如果能找到特征值为1的特征向量，那么它就是旋转轴，因为旋转并不进行缩放，且旋转轴在线性变换中保持不变。
 
-![image-20200922152945686](../../img/Blog/LinearAlgebra/image-20200922152945686.png)
+![image-20200922152945686](/img/Blog/LinearAlgebra/image-20200922152945686.png)
 
 
 
@@ -702,27 +702,27 @@ $det(A) =0$：空间被压缩到更低的维度，这时不存在逆变换，因
 
 特征向量的概念，等号左侧表示矩阵向量的乘积，等号右侧表示向量数乘，可以将右侧重写为某个向量的乘积，$\vec I$为单位向量。
 
-![image-20200922152931670](../../img/Blog/LinearAlgebra/image-20200922152931670.png)
+![image-20200922152931670](/img/Blog/LinearAlgebra/image-20200922152931670.png)
 
-![image-20200922153357401](../../img/Blog/LinearAlgebra/image-20200922153357401.png)
+![image-20200922153357401](/img/Blog/LinearAlgebra/image-20200922153357401.png)
 
 求解等式，就是使左侧的行列式det为0，$\lambda$就是特征值。
 
-![image-20200922153527410](../../img/Blog/LinearAlgebra/image-20200922153527410.png)
+![image-20200922153527410](/img/Blog/LinearAlgebra/image-20200922153527410.png)
 
 
 
-![image-20201121180605568](../../img/Blog/LinearAlgebra/image-20201121180605568.png)
+![image-20201121180605568](/img/Blog/LinearAlgebra/image-20201121180605568.png)
 
 
 
 求解$\lambda$对应的特征向量时，即求解满足$(A-\lambda I)\vec{X}=0$的所有向量$\vec{X}$。
 
-![image-20201121181300520](../../img/Blog/LinearAlgebra/image-20201121181300520.png)
+![image-20201121181300520](/img/Blog/LinearAlgebra/image-20201121181300520.png)
 
 对应原始矩阵上所有落在$\begin{bmatrix} -1 \\ 1 \end{bmatrix}$的向量被拉伸了2倍。
 
-![image-20201121181819854](../../img/Blog/LinearAlgebra/image-20201121181819854.png)
+![image-20201121181819854](/img/Blog/LinearAlgebra/image-20201121181819854.png)
 
 
 
@@ -732,19 +732,19 @@ $det(A) =0$：空间被压缩到更低的维度，这时不存在逆变换，因
 
 二维线性变换不一定存在特征向量，例如左旋90°，每个想都都发生了旋转，离开了张成空间。如果强行计算，会得到两个虚根：
 
-![image-20200922154353867](../../img/Blog/LinearAlgebra/image-20200922154353867.png)
+![image-20200922154353867](/img/Blog/LinearAlgebra/image-20200922154353867.png)
 
 
 
 剪切变换的特征向量分布在x轴：
 
-![image-20200922154541171](../../img/Blog/LinearAlgebra/image-20200922154541171.png)
+![image-20200922154541171](/img/Blog/LinearAlgebra/image-20200922154541171.png)
 
 
 
  只有一个特征值，但是特征向量不一定只在一条直线上：
 
-![image-20200922154704668](../../img/Blog/LinearAlgebra/image-20200922154704668.png)
+![image-20200922154704668](/img/Blog/LinearAlgebra/image-20200922154704668.png)
 
 
 
@@ -754,31 +754,31 @@ $det(A) =0$：空间被压缩到更低的维度，这时不存在逆变换，因
 
 如果特征向量是基向量，它对应的矩阵是一个对角矩阵，矩阵的对角元是它们所属的特征值。
 
-![image-20201121182906650](../../img/Blog/LinearAlgebra/image-20201121182906650.png)
+![image-20201121182906650](/img/Blog/LinearAlgebra/image-20201121182906650.png)
 
 
 
 对角矩阵在求幂次时更方便求解，对应的幂次就是对角元的幂次。
 
-![image-20201121183110982](../../img/Blog/LinearAlgebra/image-20201121183110982.png)
+![image-20201121183110982](/img/Blog/LinearAlgebra/image-20201121183110982.png)
 
 
 
 而对于非对角矩阵的幂次求解就非常麻烦。
 
-![image-20201121183319365](../../img/Blog/LinearAlgebra/image-20201121183319365.png)
+![image-20201121183319365](/img/Blog/LinearAlgebra/image-20201121183319365.png)
 
 
 
 实际遇到对角矩阵的概率很低，但是我们可以通过基坐标变换来得到对角矩阵，前提有足够多的特征向量且可以张成整个空间，例如剪切变化就不行，应为它只有一个特征向量，无法进行坐标变换。
 
-![image-20201121184627004](../../img/Blog/LinearAlgebra/image-20201121184627004.png)
+![image-20201121184627004](/img/Blog/LinearAlgebra/image-20201121184627004.png)
 
-![image-20200922155515737](../../img/Blog/LinearAlgebra/image-20200922155515737.png)
+![image-20200922155515737](/img/Blog/LinearAlgebra/image-20200922155515737.png)
 
 
 
-![image-20201121202207724](../../img/Blog/LinearAlgebra/image-20201121202207724.png)
+![image-20201121202207724](/img/Blog/LinearAlgebra/image-20201121202207724.png)
 
 
 
@@ -805,25 +805,25 @@ $$
 
 线性的严格定义是：可加性和成比例性。
 
-![image-20200922163048868](../../img/Blog/LinearAlgebra/image-20200922163048868.png)
+![image-20200922163048868](/img/Blog/LinearAlgebra/image-20200922163048868.png)
 
 
 
 和函数的求导类似，求导具有可加性和成比例性。
 
-![image-20200922163207612](../../img/Blog/LinearAlgebra/image-20200922163207612.png)
+![image-20200922163207612](/img/Blog/LinearAlgebra/image-20200922163207612.png)
 
-![image-20200922163213512](../../img/Blog/LinearAlgebra/image-20200922163213512.png)
+![image-20200922163213512](/img/Blog/LinearAlgebra/image-20200922163213512.png)
 
 
 
 对于多项式的求导，我们也可以看成是矩阵的形式，将x的不同次幂看成基函数，这和多维空间的基向量类似。
 
-![image-20200922163437035](../../img/Blog/LinearAlgebra/image-20200922163437035.png)
+![image-20200922163437035](/img/Blog/LinearAlgebra/image-20200922163437035.png)
 
 因为求导的可加性和成比例行，我们可以分别对每个基向量求导，从而得到左侧的矩阵。
 
-![image-20200922163605065](../../img/Blog/LinearAlgebra/image-20200922163605065.png)
+![image-20200922163605065](/img/Blog/LinearAlgebra/image-20200922163605065.png)
 
 
 
@@ -831,7 +831,7 @@ $$
 
 对于发明向量的数学家来说，他不用考虑其他所有类似的向量，他只需要给出向量数乘和加法必须遵守的规则即定理，那么所有满足这些定理的对象，就可以使用向量所拥有的性质。
 
-![image-20200922164358498](../../img/Blog/LinearAlgebra/image-20200922164358498.png)
+![image-20200922164358498](/img/Blog/LinearAlgebra/image-20200922164358498.png)
 
-![image-20200922164421196](../../img/Blog/LinearAlgebra/image-20200922164421196.png)
+![image-20200922164421196](/img/Blog/LinearAlgebra/image-20200922164421196.png)
 
