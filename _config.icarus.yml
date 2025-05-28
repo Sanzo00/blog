@@ -111,7 +111,10 @@ navbar:
         Archives: /archives
         Categories: /categories
         Tags: /tags
-        About: /about
+        # About: /about
+        # About: https://sanzo00.github.io/
+        About: https://sanzo.top/
+        # About: '<a href="https://sanzo00.github.io/" target="_self">About</a>'
     # Links to be shown on the right of the navigation bar
     # links:
     #     Download on GitHub:
