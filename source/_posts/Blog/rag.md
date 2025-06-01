@@ -259,7 +259,77 @@ Retrieve, Summarize, Plan: Advancing Multi-hop Question Answering with an Iterat
 
 
 
+### Graph RAG
 
+#### GraphRAG [arxiv '24]
+
+From Local to Global: A Graph RAG Approach to Query-Focused Summarization [[paper]](https://arxiv.org/pdf/2404.16130) [[code]](https://github.com/microsoft/graphrag)
+
+
+
+> 解决的问题
+
+> 核心Idea
+
+> 执行流程
+
+
+
+
+
+#### KAG []
+
+KAG: Boosting LLMs in Professional Domains via Knowledge Augmented Generation [[paper]](https://arxiv.org/pdf/2409.13731) [[code]](https://github.com/OpenSPG/KAG)
+
+> 解决的问题
+
+> 核心Idea
+
+> 执行流程
+
+#### LightRAG []
+
+LightRAG: Simple and Fast Retrieval-Augmented Generation [[paper]](https://arxiv.org/pdf/2410.05779) [[code]](https://github.com/HKUDS/LightRAG)
+
+> 解决的问题
+
+> 核心Idea
+
+> 执行流程
+
+### Memory RAG
+
+#### Zep []
+
+Zep: A Temporal Knowledge Graph Architecture for Agent Memory [[paper] ](https://arxiv.org/abs/2501.13956) [[code]](https://github.com/getzep/graphiti)
+
+> 解决的问题
+
+> 核心Idea
+
+> 执行流程
+
+#### DeepNote []
+
+DeepNote: Note-Centric Deep Retrieval-Augmented Generation [[paper]](https://arxiv.org/abs/2410.08821) [[code]](https://github.com/thunlp/DeepNote)
+
+> 解决的问题
+
+> 核心Idea
+
+> 执行流程
+
+#### A-MEM []
+
+A-MEM: Agentic Memory for LLM Agents [[paper]](https://arxiv.org/abs/2502.12110) [[code]](https://github.com/agiresearch/A-mem)
+
+> 解决的问题
+
+> 核心Idea
+
+> 执行流程
+
+### Other
 
 #### OP-RAG [arixv '24]
 
