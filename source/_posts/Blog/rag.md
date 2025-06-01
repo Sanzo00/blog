@@ -5,7 +5,7 @@ sticky: 0
 toc: true
 typora-copy-images-to: ../../img/Blog/rag
 date: 2024-02-28 08:06:50
-updated: 2024-09-09 08:06:50
+updated: 2025-06-01 15:06:50
 tags: RAG
 categories: Blog
 ---
@@ -94,11 +94,174 @@ GraphRAG可以看作是对已有方法的额外扩展。通过将知识图谱引
 
 ## 研究现状
 
-**==想个分类==**
+### Iterative RAG
 
 
 
-#### OP-RAG [arixv'24]
+
+
+#### IR-COT [ACL '23]
+
+Interleaving Retrieval with Chain-of-Thought Reasoning for Knowledge-Intensive Multi-Step Questions [[paper]](https://arxiv.org/pdf/2212.10509) [[code]](https://github.com/stonybrooknlp/ircot)
+
+
+
+> 解决的问题
+
+One-step  retrieve-and-read 的方法不适用于multi-step QA。
+
+检索和生成是互补的。检索可以为生成提供支撑材料。而生成的中间信息又能反过来指导后续检索。
+
+举个例子：
+
+问题是：“哪个国家是电话发明者的出生地？”
+
+1. 需要先找出“电话的发明者是谁”，答案是**亚历山大·格雷厄姆·贝尔**。这一步中，问题和答案在词汇上有明显关联。
+
+2. 要找的是“贝尔出生在哪个国家”。但原始问题里并没有提到“贝尔”这个词，所以这一步所需的信息与原问题**没有直接的词汇或语义联系**。
+
+因此，如果不先完成第一步推理，就无法找到第二步的支持证据。
+
+
+
+> 核心idea
+
+1. 生成 = LLM(问题，历史所有检索文档)
+2. 根据上一步的生成内容，来检索文档
+
+
+
+> 执行流程
+
+
+
+![IRCoT执行流程](/img/Blog/rag/image-20250601195541379.png)
+
+
+
+
+
+
+
+#### Iter-RetGen [EMNLP '23]
+
+Enhancing Retrieval-Augmented Large Language Models with Iterative Retrieval-Generation Synergy [[paper]](https://arxiv.org/pdf/2305.15294) 
+
+
+
+> 解决的问题
+
+- 生成只针对当前检索的内容，无法感知所有的检索知识。
+- 多轮检索增加了检索和生成的开销。
+
+
+
+> 核心idea
+
+将检索和生成有机的结合起来，前面生成的答案辅助后面的检索。
+
+- 检索增强生成。
+- 生成增强检索，训练检索器，利用上一轮的生成内容提高检索精度。
+
+
+
+> 执行流程
+
+给定问题Q。
+
+1. 将上一轮的生成内容和问题Q结合起来，检索得到文档D。
+2. 根据文档D生成回答。
+3. 重复1，2
+
+
+
+![Iter-RetGen执行流程](/img/Blog/rag/image-20250601151828281.png)
+
+
+
+
+
+
+
+
+
+#### Self-RAG [ICLR '24]
+
+Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection [[paper]](https://openreview.net/forum?id=hSyW5go0v8)  [[code]](https://github.com/AkariAsai/self-rag)
+
+
+
+> 解决的问题
+
+- 没有考虑是否需要检索，只是漫无目的的检索或固定数量的检索。
+- 大量不相关和容复的检索内容，导致低质量的生成。
+
+
+
+> 核心idea
+
+训练LM生成特殊reflection token，来决定是否需要检索，以及判断生成内容的相关性。
+
+
+
+> 执行流程
+
+给定问题Q。
+
+1. 首先判断是否执行检索，需要则生成retrieval token。
+2. 并行的执行检索，并为每个文档生成输出。
+3. 生成critique token，评估相关性，选择最相关的文档。
+4. 重复以上步骤
+
+
+
+![Self-RAG执行流程](/img/Blog/rag/image-20250601154008636.png)
+
+
+
+
+
+#### ReSP [WWW '25]
+
+Retrieve, Summarize, Plan: Advancing Multi-hop Question Answering with an Iterative Approach [[paper]](https://dl.acm.org/doi/pdf/10.1145/3701716.3716889) 
+
+> 解决的问题
+
+现有iterative RAG在处理multi-hop QA存在的问题：
+
+- 过长的上下文引入噪声，使得关键信息被忽视。
+- 缺少记录模型推理的路径，存在redundant planning。
+  - over-planning：已经能回答正确答案，还继续执行检索和生成。
+  - repetitive-planning：对相同子问题的重复处理。
+
+> 核心Idea
+
+- 引入Reasoner来决定是否继续进行检索
+- 使用memory记录历史检索生成结果
+  - Global Evidence Memory（防止over-palnning）。
+  - Local Pathway Memory，记录每一步的检索和生成过程（防止repetitive-planning）。
+
+
+
+> 执行流程
+
+给定用户的问题Q：
+
+1. Reasoner结合历史产生的Memory来判断是否继续检索。
+   - 不需要检索，通过Generator生成最终答案。
+   - 需要继续检索，则生成子问题执行后续操作。
+2. 根据子问题检索top-k文档。
+3. 使用summarier更新global memory，local memory。
+
+
+
+![ReSP框架图](/img/Blog/rag/image-20250601150330636.png)
+
+
+
+
+
+#### OP-RAG [arixv '24]
 
 [paper](https://arxiv.org/pdf/2409.01666)
 
