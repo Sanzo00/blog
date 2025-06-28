@@ -5,8 +5,10 @@ sticky: 0
 toc: true
 typora-copy-images-to: ../../img/Blog/llm-inference
 date: 2024-09-19 16:38:06
-updated: 2025-06-15 16:38:06
-tags: LLM, Inference
+updated: 2025-06-28 16:38:06
+tags: 
+	- LLM
+	- Inference
 categories: Blog
 ---
 
@@ -14,6 +16,44 @@ categories: Blog
 记录一些LLM推理优化相关的论文
 
 <!-- more -->
+
+
+
+
+
+## FlashAttention
+
+
+
+## PageAttention
+
+
+
+## RadixAttention
+
+
+
+## RingAttention
+
+
+
+
+
+## RAGCache [Arxiv '24]
+
+
+
+## Cache-Craft [SIGMOD '25]
+
+
+
+## CacheBlend [EuroSys '25]
+
+
+
+## Superposition [ICLR '24]
+
+
 
 
 
@@ -86,13 +126,134 @@ Parrot设计了一个Semantic Variables的编程抽象，用来将用户的执�
 
 ## AquaPipe [SIGMOD '**25**]
 
+AquaPipe: A Quality-Aware Pipeline for Knowledge Retrieval and Large Language Models [[paper]](https://dl.acm.org/doi/10.1145/3709661) 
 
 
 
 
 
 
-## Sparse Attention
+
+
+
+
+
+## Similarity-based
+
+
+
+
+
+### PQCache [SIGMOD '25]
+
+PQCache: Product Quantization-based KVCache for Long Context LLM Inference [[paper]](https://arxiv.org/pdf/2407.12820v2) [[code]](https://github.com/HugoZHL/PQCache)
+
+
+
+PQCache解决的LLM在long context下的推理效率问题。
+
+长上下文推理对显存需求带来了挑战，如何在有限的显存空间实现高效的推理，同时保存高的输出质量，是一个被广泛关注的问题。
+
+一个符合直觉的方法：selective attention，通过选择部分token进行注意力计算，显著降低了对内存和计算的需求。
+
+现有selective attention方法可以分为：KV Cache dropping (Scissorhands, StreamingLLM [ICLR '24], H2O [NIPS '23])，KV Cache offloading (InfLLM [arxiv '24] SparQAttention) 两类。
+
+
+
+如下图所示，PQCache发现selective attention的执行和传统信息检索的Product Quantization的过程很像。
+
+在LLM的注意力计算过程中，向量Q和所有的K进行相似度计算，然后经过softmax并与V加权求和得到输出X。
+
+Q和K的相似度计算和信息检索中根据用户问题检索相似的top-k个向量的过程基本一致。
+
+![Information retrieval vs. LLM inference with seletive attention](/img/Blog/llm-inference/image-20250628201826548.png)
+
+
+
+
+
+本文选择了开销比较低的Product Quantization来管理KV Cache。
+
+PQ的索引构建和搜索过程如下图所示。
+
+> PQ Construction：
+
+1. 将每个KV Cache向量划分为m个子向量。
+2. 对所有KV Cache的每个子向量进行聚类，生成$2^b$个质心。
+3. 原来KV Cache向量对应的m个子向量编码为距离最近的质心id。
+
+> PQ Searching:
+
+1. 查询Q向量同样被划分为M个子向量。
+2. 每个子向量和对应的空间中$2^b$个向量计算相似度。
+3. 根据相似度计算原始向量与Q的相似性得分，选取TopK得分的向量。
+
+![PQ construction and serarching](/img/Blog/llm-inference/image-20250628202224666.png)
+
+
+
+PQCache的整体执行流程如下图所示：
+
+1. 在Prefilling阶段，正常计算得到每个输入token的KV Cache，并异步的卸载到CPU。
+2. CPU收到KV Cache之后，构建PQ用于后续检索。
+3. 在Decoding阶段，加载Centroids和PQ Codes，并计算TopK K向量。
+4. 根据计算的TopK向量，加载对应KV向量，并在GPU执行注意力计算。
+
+在实现中，PQCache的KV Cache包含三种：initial tokens，middle tokens，and local tokens.
+
+StreamingLLM中发现attention sink的现象，即initial tokens受到更多的注意力关注，对模型的回答质量有很大的影响。
+
+local tokens表示最近计算的token。middle tokens表示历史KV Cache保存在CPU中。
+
+PQCache将initial和local tokens保存在GPU，并维护一个窗口，超过窗口的local token被卸载到CPU。
+
+![Overview of PQCache](/img/Blog/llm-inference/image-20250628202419202.png)
+
+
+
+![PQCache v.s. sequential scheduling.](/img/Blog/llm-inference/image-20250628212757321.png)
+
+
+
+
+
+
+
+
+
+## Apt-Serve [SIGMOD '25]
+
+Apt-Serve: Adaptive Request Scheduling on Hybrid Cache for Scalable LLM Inference Serving [[code]](https://github.com/eddiegaoo/Apt-Serve) [[paper]](https://arxiv.org/pdf/2504.07494)
+
+
+
+
+
+
+
+## Training
+
+
+
+[[paper]](https://arxiv.org/pdf/2407.12117v3)
+
+
+
+
+
+Malleus: Straggler-Resilient Hybrid Parallel Training of Large-scale Models via Malleable Data and Model Parallelization 
+
+
+
+
+
+## Sparse Attention/Long context
+
+
+
+### LM-infinite
+
+
 
 
 
@@ -100,7 +261,11 @@ Parrot设计了一个Semantic Variables的编程抽象，用来将用户的执�
 
 
 
-### Streaming LLM [ICLR '24]
+### StreamingLLM [ICLR '24]
+
+Efficient Streaming Language Models with Attention Sinks [[code]](https://github.com/mit-han-lab/streaming-llm)  [[paper]](https://arxiv.org/abs/2309.17453)
+
+
 
 > 解决的问题
 
@@ -146,3 +311,18 @@ LLM的注意力计算，保证所有token的注意力之和为1，即使当前to
 
 
 
+> 细节
+
+
+
+1. 按照在cache中的位置，重新分配token的位置信息，以保成相对位置的正确性。
+
+   如下图所示，当生成 token 9的时候，每个token的位置为[0, 1, 2, 3, 4, 5, 6, 7]而不是[0, 1, 2, 3, 6, 7, 8, 9]。
+
+   ![图3：StreamingLLM的的KV Cache](/img/Blog/llm-inference/image-20250615213712847.png)
+
+2. key tensor的缓存和使用
+
+   - 对于RoPE，在应用 rotray 变化前缓存 key tensor，在加载的时候对其rotray。
+
+   - 对于ALiBi，在注意力分数上添加一个linear bias。
