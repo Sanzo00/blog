@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>线性代数 - Sanzo Blog</title><link rel="manifest" href="/blog/manifest.json"><meta name="application-name" content="Sanzo Blog"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Sanzo Blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="线性代数笔记。"><meta property="og:type" content="blog"><meta property="og:title" content="线性代数"><meta property="og:url" content="https://sanzo.top/blog/Blog/LinearAlgebra/"><meta property="og:site_name" content="Sanzo Blog"><meta property="og:description" content="线性代数笔记。"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20210111133613519.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20210111133933964.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200919202730552.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200919202902807.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200919212207688.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200919214800453.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200919214828033.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200919214904438.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200919214934222.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200919215136876.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200919221913292.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200919221959763.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200919222849490.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200919222936127.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200919223010638.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200919223307428.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200919223234205.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200919223255780.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200919223807543.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200919231921745.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200919233624101.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200920130814473.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200920130933473.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200920130915512.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200920131118018.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200920131210961.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/GIF-2020-9-2013-22-08.gif"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200920132802227.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200920132900515.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200920133432426.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200920133410970.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200920133555705.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200920141506454.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/GIF-2020-9-20-14-36-18.gif"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/GIF-2020-9-20-14-40-00.gif"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/GIF-2020-9-20-14-43-07.gif"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200921204842378.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200921204804360.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200921205137915.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200921213129723.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200921215610833.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200921215905156.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200921220129867.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200921220208217.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200921220552315.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922102602172.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922102722945.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922103452143.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922103702614.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922103629488.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922122052167.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922122142162.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922122515739.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922122703239.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922122835340.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922123007736.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922123018405.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922122835340.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922123829003.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922123858594.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922133429853.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922133607455.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922133725994.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/GIF-2020-11-21-17-46-40.gif"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922152146060.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922152945686.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922152931670.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922153357401.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922153527410.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20201121180605568.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20201121181300520.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20201121181819854.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922154353867.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922154541171.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922154704668.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20201121182906650.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20201121183110982.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20201121183319365.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20201121184627004.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922155515737.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20201121202207724.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922163048868.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922163207612.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922163213512.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922163437035.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922163605065.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922164358498.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922164421196.png"><meta property="article:published_time" content="2021-06-13T09:09:21.000Z"><meta property="article:modified_time" content="2021-06-13T08:09:21.000Z"><meta property="article:author" content="Sanzo"><meta property="article:tag" content="linear algebra"><meta property="article:tag" content="math"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20210111133613519.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sanzo.top/blog/Blog/LinearAlgebra/"},"headline":"线性代数","image":["https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20210111133613519.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20210111133933964.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200919202730552.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200919202902807.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200919212207688.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200919214800453.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200919214828033.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200919214904438.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200919214934222.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200919215136876.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200919221913292.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200919221959763.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200919222849490.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200919222936127.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200919223010638.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200919223307428.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200919223234205.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200919223255780.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200919223807543.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200919231921745.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200919233624101.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200920130814473.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200920130933473.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200920130915512.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200920131118018.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200920131210961.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/GIF-2020-9-2013-22-08.gif","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200920132802227.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200920132900515.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200920133432426.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200920133410970.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200920133555705.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200920141506454.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/GIF-2020-9-20-14-36-18.gif","https://sanzo.top/blog/img/Blog/LinearAlgebra/GIF-2020-9-20-14-40-00.gif","https://sanzo.top/blog/img/Blog/LinearAlgebra/GIF-2020-9-20-14-43-07.gif","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200921204842378.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200921204804360.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200921205137915.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200921213129723.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200921215610833.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200921215905156.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200921220129867.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200921220208217.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200921220552315.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922102602172.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922102722945.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922103452143.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922103702614.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922103629488.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922122052167.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922122142162.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922122515739.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922122703239.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922122835340.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922123007736.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922123018405.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922122835340.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922123829003.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922123858594.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922133429853.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922133607455.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922133725994.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/GIF-2020-11-21-17-46-40.gif","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922152146060.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922152945686.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922152931670.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922153357401.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922153527410.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20201121180605568.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20201121181300520.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20201121181819854.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922154353867.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922154541171.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922154704668.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20201121182906650.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20201121183110982.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20201121183319365.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20201121184627004.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922155515737.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20201121202207724.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922163048868.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922163207612.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922163213512.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922163437035.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922163605065.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922164358498.png","https://sanzo.top/blog/img/Blog/LinearAlgebra/image-20200922164421196.png"],"datePublished":"2021-06-13T09:09:21.000Z","dateModified":"2021-06-13T08:09:21.000Z","author":{"@type":"Person","name":"Sanzo"},"publisher":{"@type":"Organization","name":"Sanzo Blog","logo":{"@type":"ImageObject","url":"https://sanzo.top/img/sanzo.png"}},"description":"线性代数笔记。"}</script><link rel="canonical" href="https://sanzo.top/blog/Blog/LinearAlgebra/"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/blog/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><script>var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?b59d4dcd7ecbf66eec1a1b7ff331e1a9";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();</script><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=G-82SWX0KLXT" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+        gtag('config', 'G-82SWX0KLXT');</script><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><meta name="follow.it-verification-code" content="ryvLrPRCwHTCNPCEl4LW"><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/blog/atom.xml" title="Sanzo Blog" type="application/atom+xml">
+</head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/blog/"><img src="/blog/img/sanzo.png" alt="Sanzo Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/blog/">Home</a><a class="navbar-item" href="/blog/archives">Archives</a><a class="navbar-item" href="/blog/categories">Categories</a><a class="navbar-item" href="/blog/tags">Tags</a><a class="navbar-item" href="https://sanzo.top/">About</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">线性代数</h1><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><i class="far fa-calendar-alt"> </i><time datetime="2021-06-13T09:09:21.000Z" title="2021-06-13T09:09:21.000Z">2021-06-13</time></span><span class="level-item is-hidden-mobile"><i class="far fa-calendar-check"> </i><time datetime="2021-06-13T08:09:21.000Z" title="2021-06-13T08:09:21.000Z">2021-06-13</time></span><span class="level-item"><i class="far fa-folder-open has-text-grey"></i> <a class="link-muted" href="/blog/categories/Blog/">Blog</a></span><span class="level-item"><i class="far fa-clock has-text-grey"></i> 37 minutes read (About 5616 words)</span></div></div><div class="content"><p>线性代数笔记。</p>
+<span id="more"></span>
+
+
+
+<h1 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h1><h2 id="行列式"><a href="#行列式" class="headerlink" title="行列式"></a>行列式</h2><blockquote>
+<p>二阶行列式</p>
+</blockquote>
+<p>$\begin{vmatrix} a_{11} &amp; a_{12} \\  a_{21} &amp; a_{22} \\  \end{vmatrix} &#x3D; a_{11}a_{22} - a_{12}a_{21}$</p>
+<blockquote>
+<p>三阶行列式</p>
+</blockquote>
+<div>
+$ \begin{vmatrix} a_{11} & a_{12} & a_{13} \\  a_{21} & a_{22} & a_{23} \\ a_{31} & a_{32} & a_{33} \end{vmatrix} = a_{11}a_{22}a_{33} + a_{12}a_{23}a_{31} + a_{13}a_{21}a_{32} -a_{13}a_{22}a_{31} - a_{23}a_{32}a_{11} - a_{33}a_{12}a_{21}$
+</div>
+
+
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20210111133613519.png" alt="image-20210111133613519"></p>
+<p>对于更高阶的行列式，一般将行列式转为三角形，这样只用计算对角线的乘积即可。</p>
+<h2 id="余子式"><a href="#余子式" class="headerlink" title="余子式"></a>余子式</h2><p>$n$阶行列式，把第$a_{ij}$所在的行列删除，留下的$n-1$阶行列式称为余子式，记为$M_{ij}$。</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20210111133933964.png" alt="image-20210111133933964"></p>
+<h2 id="代数余子式"><a href="#代数余子式" class="headerlink" title="代数余子式"></a>代数余子式</h2><p>代数余子式的$A_{ij} &#x3D; -1^{i+j}M_{ij}$。</p>
+<h2 id="伴随矩阵"><a href="#伴随矩阵" class="headerlink" title="伴随矩阵"></a>伴随矩阵</h2><p>代数余子式的转置称为伴随矩阵，只有方阵才有伴随矩阵，记为$A^*$。</p>
+<p>伴随矩阵的性质：</p>
+<p>$AA^* &#x3D; A^*A &#x3D; |A|E$</p>
+<p>$A^{-1} &#x3D; \frac{1}{|A|}A^*（存在A^{-1}）$</p>
+<p>$(A^*)^{-1}&#x3D;(A^{-1})^*&#x3D;\frac{1}{|A|}A$</p>
+<p>$|A^*|&#x3D;|A|^{n-1}$</p>
+<p>$(kA)^*&#x3D;k^{n-1}A^*$</p>
+<h2 id="矩阵的逆"><a href="#矩阵的逆" class="headerlink" title="矩阵的逆"></a>矩阵的逆</h2><p>$A^{-1} &#x3D; \frac{1}{|A|}A^*（存在A^{-1}）$</p>
+<p>$A^{-1} &#x3D; \frac{1}{|A|}A^{*}&#x3D;\frac{1}{ad-bc}\begin{bmatrix}d &amp;-b\ -c &amp; a\end{bmatrix}$</p>
+<p>例：</p>
+<div>
+ $\begin{bmatrix}1&-1\\1&1 \end{bmatrix}^{-1} = \frac{1}{2}\begin{bmatrix}1&1\\-1&1 \end{bmatrix}$
+</div>
+
+
+
+<div></div>
+
+
+
+<h1 id="线性代数的本质"><a href="#线性代数的本质" class="headerlink" title="线性代数的本质"></a>线性代数的本质</h1><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1ib411t7YR">b站视频链接</a></p>
+<h2 id="什么是向量"><a href="#什么是向量" class="headerlink" title="什么是向量"></a>什么是向量</h2><p>向量对于不同的学科有不一样的定义。</p>
+<p>物理中的向量有<strong>长度</strong>和<strong>方向</strong>决定，长度和方向不变可以随意移动，它们表示的是同一个向量。</p>
+<p>计算机中的向量更多的是对数据的抽象，可以根据面积和价格定义一个房子$\begin{bmatrix}100m^2\\700000￥\end{bmatrix}$。</p>
+<p>数学中的向量可以是任意东西，只要保证两个<strong>向量的相加</strong>$\vec v + \vec w$以及<strong>数字和向量相乘</strong>$2\vec v$是有意义的即可。</p>
+<p>线性代数中的向量可以理解为一个空间中的箭头，这个箭头起点落在原点。如果空间中有许多的向量，可以点表示一个向量，即向量头的坐标。</p>
+<blockquote>
+<p>向量的基本运算</p>
+</blockquote>
+<p>向量的加法：可以理解为在坐标中两个向量的移动。</p>
+<div>
+$\begin{bmatrix}
+   1 \\
+   2
+  \end{bmatrix} + \begin{bmatrix}
+   3 \\
+   -1
+  \end{bmatrix} = \begin{bmatrix}
+   4 \\
+   1
+  \end{bmatrix}$
+</div>
+
+
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200919202730552.png" alt="image-20200919202730552"></p>
+<p>数字和向量相乘：可以理解为向量的缩放。</p>
+<div>
+$2\begin{bmatrix}
+   3 \\
+   1
+  \end{bmatrix}=\begin{bmatrix}
+   6 \\
+   2
+  \end{bmatrix}$
+</div>
+
+
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200919202902807.png" alt="image-20200919202902807"></p>
+<h2 id="线性组合、张成空间、基"><a href="#线性组合、张成空间、基" class="headerlink" title="线性组合、张成空间、基"></a>线性组合、张成空间、基</h2><blockquote>
+<p>线性组合</p>
+</blockquote>
+<p>两个数乘向量称为两个向量的线性组合$a\vec v+ b\vec w$。</p>
+<p>两个不共线的向量通过不同的线性组合可以得到二维平面中的所有向量。</p>
+<p>两个共线的向量通过线程组合只能得到一个直线的所有向量。</p>
+<p>如果两个向量都是零向量那么它只能在原点。</p>
+<blockquote>
+<p>张成空间</p>
+</blockquote>
+<p>所有可以表示给定向量线性组合的向量的集合称为给定向量的张成空间（span）。</p>
+<p>一般来说两个向量张成空间可以是直线、平面。</p>
+<p>三个向量张成空间可以是平面、空间。</p>
+<p>如果多个向量，并且可以移除其中一个而不减小张成空间，那么它们是<strong>线性相关</strong>的，也可以说一个向量可以表示为其他向量的线性组合$\vec u &#x3D; a \vec v + b\vec w$。</p>
+<p>如果所有的向量都给张成的空间增加了新的维度，它们就成为线性无关的$\vec u \neq a \vec v + b\vec w$。</p>
+<blockquote>
+<p>基</p>
+</blockquote>
+<p>向量空间的一组及是张成该空间的一个线性无关向量集。</p>
+<h2 id="矩阵与线性变换"><a href="#矩阵与线性变换" class="headerlink" title="矩阵与线性变换"></a>矩阵与线性变换</h2><p>严格意义上来说，线性变换是将向量作为输入和输出的一类函数。</p>
+<p>变化可以多种多样，线性变化将变化限制在一个特殊类型的变换上，可以简单的理解为网格线保持平行且等距分布。</p>
+<p>线性变化满足一下两个性质：</p>
+<ul>
+<li>线性变化前后直线依旧是直线不能弯曲。</li>
+<li>原点必须保持固定。</li>
+</ul>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200919212207688.png" alt="image-20200919212207688"></p>
+<p>可以使用<strong>基向量来描述线性变化</strong>：</p>
+<p>通过记录两个基向量$\hat{i}$,$\hat{j}$的变换，就可以得到其他变化后的向量。</p>
+<p>已知向量$\vec v &#x3D; \begin{bmatrix}-1\\2\end{bmatrix}$</p>
+<p>变换之前的$\hat i$和$\hat j$：</p>
+<div>
+$$
+\hat{i} = \begin{bmatrix}
+1 \\
+   0
+  \end{bmatrix} \\
+  \hat{j} = \begin{bmatrix}
+0 \\
+   1
+  \end{bmatrix} \\
+\vec{v} = -1\hat{i} + 2 \hat{j} = \begin{bmatrix}
+-1 \\
+   2
+  \end{bmatrix}
+$$
+<div>
+变换之后的$\hat i$和$\hat j$：
+<div>
+$$
+\begin{aligned}
+\hat{i} = \begin{bmatrix}
+1 \\
+   -2
+  \end{bmatrix} \\
+  \hat{j} = \begin{bmatrix}
+3 \\
+   0
+  \end{bmatrix} \\
+\vec{v} = -1\hat{i} + 2 \hat{j} &= \begin{bmatrix}
+5 \\
+   2
+  \end{bmatrix} \\
+  &= -1\begin{bmatrix}
+1 \\
+   -2
+  \end{bmatrix}  + 2 \begin{bmatrix}
+3 \\
+  0
+  \end{bmatrix} \\
+  &= \begin{bmatrix}
+1 & 3 \\
+   -2 & 0
+  \end{bmatrix}  \begin{bmatrix}
+-1 \\
+   2
+  \end{bmatrix} \\
+  &= \begin{bmatrix}
+5 \\
+   2
+  \end{bmatrix} \\
+\end{aligned}
+$$
+<div>
+我们可以将变换后的$\hat i$和$\hat j$写成矩阵的形式：$\begin{bmatrix}
+1 & 3 \\
+   -2 & 0
+  \end{bmatrix}  \begin{bmatrix}
+-1 \\
+   2
+  \end{bmatrix}$，通过矩阵的乘法得到变化后的向量。
+
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200919214800453.png" alt="image-20200919214800453"></p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200919214828033.png" alt="image-20200919214828033"></p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200919214904438.png" alt="image-20200919214904438"></p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200919214934222.png" alt="image-20200919214934222"></p>
+<p>如果变化后的$\hat{i}$和$\hat{j}$是线性相关的，变化后向量的张量就是一维空间：</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200919215136876.png" alt="image-20200919215136876"></p>
+<h2 id="矩阵乘法与线性变换复合的联系"><a href="#矩阵乘法与线性变换复合的联系" class="headerlink" title="矩阵乘法与线性变换复合的联系"></a>矩阵乘法与线性变换复合的联系</h2><blockquote>
+<p>线性变化的复合</p>
+</blockquote>
+<p>如何描述<strong>先旋转再剪切</strong>的操作呢？</p>
+<p>一个通俗的方法是首先<strong>左乘旋转矩阵</strong>然后<strong>左乘剪切矩阵</strong>。</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200919221913292.png" alt="image-20200919221913292"></p>
+<p>两个矩阵的乘积需要从右向左读，类似函数的复合。</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200919221959763.png" alt="image-20200919221959763"></p>
+<p>这样两个矩阵的乘积就对应了一个复合的线性变换，最终得到对应变换后的$\hat{i}$和$\hat{j}$。</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200919222849490.png" alt="image-20200919222849490"></p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200919222936127.png" alt="image-20200919222936127"></p>
+<p>这一过程具有普适性：</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200919223010638.png" alt="image-20200919223010638"></p>
+<blockquote>
+<p>矩阵乘法的顺序</p>
+</blockquote>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200919223307428.png" alt="image-20200919223307428"></p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200919223234205.png" alt="image-20200919223234205"></p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200919223255780.png" alt="image-20200919223255780"></p>
+<blockquote>
+<p>如何证明矩阵乘法的结合性？</p>
+</blockquote>
+<p>$(AB)C &#x3D; A(BC)$</p>
+<p>根据线性变化我们可以得出，矩阵的乘法都是以CBA的顺序变换得到，所以他们本质上相同，通过变化的形式解释比代数计算更加容易理解。</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200919223807543.png" alt="image-20200919223807543"></p>
+<h2 id="三维空间的线性变化"><a href="#三维空间的线性变化" class="headerlink" title="三维空间的线性变化"></a>三维空间的线性变化</h2><p>三维的空间变化和二维的类似。</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200919231921745.png" alt="image-20200919231921745"></p>
+<p>同样跟踪基向量的变换，能很好的解释变换后的向量，同样两个矩阵相乘也是。</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200919233624101.png" alt="image-20200919233624101"></p>
+<h2 id="行列式-1"><a href="#行列式-1" class="headerlink" title="行列式"></a>行列式</h2><blockquote>
+<p>行列式的本质</p>
+</blockquote>
+<p>行列式的本质是计算线性变化对空间的缩放比例，具体一点就是，测量一个给定区域面积增大或减小的比例。</p>
+<p>单位面积的变换代表任意区域的面积变换比例。</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200920130814473.png" alt="image-20200920130814473"></p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200920130933473.png" alt="image-20200920130933473"></p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200920130915512.png" alt="image-20200920130915512"></p>
+<p><strong>行列式的值表示缩放比例。</strong></p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200920131118018.png" alt="image-20200920131118018"></p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200920131210961.png" alt="image-20200920131210961"></p>
+<p>行列式为什么有负值呢？</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/GIF-2020-9-2013-22-08.gif"></p>
+<p>三维空间的行列式类似，它的单位是一个单位1的立方体。</p>
+<p>三位空间的线性变换，可以使用<strong>右手定则</strong>判断三维空间的定向。如果变换前后都可以通过右手定则得到，那么他的行列式就是正值，否则为负值。</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200920132802227.png" alt="image-20200920132802227"></p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200920132900515.png" alt="image-20200920132900515"></p>
+<blockquote>
+<p>行列式的计算</p>
+</blockquote>
+<p>二阶行列式</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200920133432426.png" alt="image-20200920133432426"></p>
+<p>三阶行列式</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200920133410970.png" alt="image-20200920133410970"></p>
+<p>二阶行列式中a、d，表示横向和纵向的拉伸，b、c表示对角线的拉伸和压缩的情况。</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200920133555705.png" alt="image-20200920133555705"></p>
+<h2 id="逆矩阵、列空间、秩、零空间"><a href="#逆矩阵、列空间、秩、零空间" class="headerlink" title="逆矩阵、列空间、秩、零空间"></a>逆矩阵、列空间、秩、零空间</h2><blockquote>
+<p>线性方程组</p>
+</blockquote>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200920141506454.png" alt="image-20200920141506454"></p>
+<p>从几何的角度来思考，矩阵A表示一个线性变换，我们需要找到一个$\vec x$使得它在变换后和$\vec v$重合。</p>
+<blockquote>
+<p>逆矩阵</p>
+</blockquote>
+<p>矩阵的逆运算，记为$\vec A &#x3D; \begin{bmatrix}3&amp;1 \\0&amp;2\end{bmatrix}^{-1}$，对于线程方程$A \vec x &#x3D; \vec v $来说，找到$A^{-1}$就得到解$\vec x &#x3D; A^{-1} \vec v$。</p>
+<div>
+  $A^{-1}A=\begin{bmatrix}
+1&0 \\
+   0&1
+  \end{bmatrix}$，什么都不做称为恒等变换。
+<div>
+
+
+
+<blockquote>
+<p>线性方程组的解</p>
+</blockquote>
+<p>对于方程组$A\vec x &#x3D; \vec v$，线性变换A存在两种情况：</p>
+<p>$det(A) \neq0$：这时空间的维数并没有改变，有且只有一个向量经过线性变换后和$\vec v$重合。</p>
+<p>$det(A) &#x3D;0$：空间被压缩到更低的维度，这时不存在逆变换，因为不能将一个直线解压缩为一个平面，这样就会映射多个向量。但是即使不存在逆变换，解可能仍然存在，因为目标$\vec v$刚好落在压缩后的空间上。</p>
+<blockquote>
+<p>秩</p>
+</blockquote>
+<p>秩代表变换后空间的维度。</p>
+<p>如果线性变化后将空间压缩成一条直线，那么称这个变化的秩为1；</p>
+<p>如果线性变化后向量落在二维平面，那么称这个变化的秩为2。</p>
+<blockquote>
+<p>列空间</p>
+</blockquote>
+<p>所有可能的<strong>输出向量</strong>$A\vec v$构成的集合，称为列空间，即所有列向量张成的空间。</p>
+<blockquote>
+<p>零空间（Null space）</p>
+</blockquote>
+<p>所有的线性变化中，零向量一定包含在列空间中，因为线性变换原点保持不动。对于非满秩的情况来说，会有一系列的向量在变换后仍为零向量。</p>
+<p>二维空间压缩为一条直线，一条线上的向量都会落到原点。</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/GIF-2020-9-20-14-36-18.gif"></p>
+<p>三维空间压缩为二维平面，一条线上的向量都会落到原点。</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/GIF-2020-9-20-14-40-00.gif"></p>
+<p>三维空间压缩为一条直线，整个平面上的向量都会落到原点。</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/GIF-2020-9-20-14-43-07.gif"></p>
+<p>当$A\vec x &#x3D; \vec v$中的$\vec v$是一个零向量，即$A\vec x &#x3D; \begin{bmatrix}0 \\0\end{bmatrix}$时，零空间就是它所有可能的解。</p>
+<h2 id="非方阵、不同维度空间之间的线性变换"><a href="#非方阵、不同维度空间之间的线性变换" class="headerlink" title="非方阵、不同维度空间之间的线性变换"></a>非方阵、不同维度空间之间的线性变换</h2><p>不同维度的变换也是存在的。</p>
+<p>一个$3\times2$的矩阵：$\begin{bmatrix}2&amp;0\-1&amp;1\-2&amp;1 \end{bmatrix}$它的集合意义是将一个二维空间映射到三维空间上，矩阵有两列表明输入空间有两个基向量，有三行表示每个向量在变换后用三个独立的坐标描述。</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200921204842378.png" alt="image-20200921204842378"></p>
+<p>一个$2\times 3$的矩阵：$\begin{bmatrix}3&amp;1&amp;4\1&amp;5&amp;9 \end{bmatrix}$则表示将一个三维空间映射到二维空间上。</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200921204804360.png" alt="image-20200921204804360"></p>
+<p>一个$1\times 2$的矩阵：$\begin{bmatrix}1&amp;2 \end{bmatrix}$表示一个二维空间映射到一维空间。</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200921205137915.png" alt="image-20200921205137915"></p>
+<h2 id="点积与对偶性"><a href="#点积与对偶性" class="headerlink" title="点积与对偶性"></a>点积与对偶性</h2><blockquote>
+<p>点积</p>
+</blockquote>
+<p> 对于两个维度相同的向量，他们的点积计算为：$\begin{bmatrix}1\\2\end{bmatrix}\cdot\begin{bmatrix} 3\\4\end{bmatrix}&#x3D;1\cdot3+2\cdot4&#x3D;11$。</p>
+<p>点积的几何解释是将一个向量向一个向量投影，然后两个长度相乘，如果为负数则表示反向。</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200921213129723.png" alt="image-20200921213129723"></p>
+<p>为什么点积和坐标相乘联系起来了？这和对偶性有关。</p>
+<blockquote>
+<p>对偶性</p>
+</blockquote>
+<p>对偶性的思想是：每当看到一个多维空间到数轴上的线性变换时，他都与空间中的唯一一个向量对应，也就是说使用线性变换和与这个向量点乘等价。这个向量也叫做线性变换的<strong>对偶向量</strong>。</p>
+<p>当二维空间向一维空间映射时，如果在二维空间中等距分布的点在变换后还是等距分布的，那么这种变换就是线性的。</p>
+<p>假设有一个线性变换A$\begin{bmatrix}1&amp;-2\end{bmatrix}$和一个向量$\vec v&#x3D;\begin{bmatrix}4\\3\end{bmatrix}$。</p>
+<p>变换后的位置为$\begin{bmatrix}1&amp;-2\end{bmatrix}\begin{bmatrix}4\\3\end{bmatrix}&#x3D;4\cdot1+3\cdot-2&#x3D;-2$，这个变换是一个二维空间向一维空间的变化，所以变换后的结果为一个坐标值。</p>
+<p>我们可以看到线性变换的计算过程和向量的点积相同$\begin{bmatrix}1\\-2\end{bmatrix}\cdot\begin{bmatrix}4\\3\end{bmatrix}&#x3D;4\cdot1+3\cdot-2&#x3D;-2$，所以向量和一个线性变化有着微妙的联系。</p>
+<p>假设有一个倾斜的数轴，上面有一个单位向量$\vec v$，对于任意一个向量它在数轴上的投影都是一个数字，这表示了一个二维向量到一位空间的一种线性变换，那么如何得到这个线性变化呢？</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200921215610833.png" alt="image-20200921215610833"></p>
+<p>由之前的内容来说，我们可以观察基向量$\vec i$和$\vec j$的变化，从而得到对应的线性变化。</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200921215905156.png" alt="image-20200921215905156"></p>
+<p>因为$\vec i$、$\vec j$、$\vec u$都是单位向量，根据对称性可以得到$\vec i$和$\vec j$在$\vec u$上的投影长度刚好是$\vec u$的坐标。</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200921220129867.png" alt="image-20200921220129867"></p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200921220208217.png" alt="image-20200921220208217"></p>
+<p>这样空间中的所有向量都可以通过线性变化$\begin{bmatrix}u_x&amp;u_y \end{bmatrix}$得到，而这个计算过程刚好和单位向量的点积相同。</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200921220552315.png" alt="image-20200921220552315"></p>
+<p>也就是为什么向量投影到直线的长度，刚好等于它与直线上单位向量的点积，对于非单位向量也是类似，只是将其扩大到对应倍数。</p>
+<h2 id="叉积"><a href="#叉积" class="headerlink" title="叉积"></a>叉积</h2><p>对于两个向量所围成的面积来说，可以使用行列式计算，将两个向量看作是变换后的基向量，这样通过行列式就可以得到变换后面积缩放的比例，因为基向量的单位为1，所以就得到了对应的面积。</p>
+<p>考虑到正向，这个面积的值存在负值，这是参照基向量$\vec i$和$\vec j$的相对位置来说的。</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200922102602172.png" alt="image-20200922102602172"></p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200922102722945.png" alt="image-20200922102722945"></p>
+<p>真正的叉积是通过两个三维向量$\vec v$和$\vec w$，生成一个新的三维向量$\vec u$，这个向量垂直于向量$\vec v$和$\vec w$所在的平面，长度等于它们围成的面积。</p>
+<p>叉积的反向可以通过右手定则判断：</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200922103452143.png" alt="image-20200922103452143"></p>
+<p>叉积的计算方法：</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200922103702614.png" alt="image-20200922103702614"></p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200922103629488.png" alt="image-20200922103629488"></p>
+<h2 id="线性代数看叉积"><a href="#线性代数看叉积" class="headerlink" title="线性代数看叉积"></a>线性代数看叉积</h2><p>参考二维向量的叉积计算：</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200922122052167.png" alt="image-20200922122052167"></p>
+<p>三维的可以写成类似的形式，但是他并是真正的叉积，不过和真正的叉积已经很接近了。</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200922122142162.png" alt="image-20200922122142162"></p>
+<p>我可以构造一个函数，它可以把一个三维空间映射到一维空间上。</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200922122515739.png" alt="image-20200922122515739"></p>
+<p>右侧行列式是线性的，所以我们可以找到一个线性变换代替这个函数。</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200922122703239.png" alt="image-20200922122703239"></p>
+<p>根据对偶性的思想，从多维空间到一维空间的线性变换，等于与对应向量的点积，这个特殊的向量$\vec p$就是我们要找的向量。</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200922122835340.png" alt="image-20200922122835340"></p>
+<blockquote>
+<p>从数值计算上:</p>
+</blockquote>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200922123007736.png" alt="image-20200922123007736"></p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200922123018405.png" alt="image-20200922123018405"></p>
+<p>向量$\vec p$的计算结果刚好和叉积计算的结果相同。</p>
+<blockquote>
+<p>从几何意义：</p>
+</blockquote>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200922122835340.png" alt="image-20200922122835340"></p>
+<p>当向量$\vec p$和向量$\begin{bmatrix}x\y\z \end{bmatrix}$点乘时，得到一个$\begin{bmatrix}x\y\z \end{bmatrix}$与$\vec v$与$\vec w$确定的平行六面体的有向体积，什么样的向量满足这个性质呢？</p>
+<p>点积的几何解释是，其他向量在$\vec p$上的投影的长度乘以$\vec p$的长度。</p>
+<p>对于平行六面体的体积来说，它等于$\vec v$和$\vec w$所确定的面积乘以$\begin{bmatrix}x\y\z \end{bmatrix}$在垂线上的投影。</p>
+<p>那么$\vec p$要想满足这一要求，那么它就刚好符合，长度等于$\vec v,\vec w$所围成的面积，且刚好垂直这个平面。</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200922123829003.png" alt="image-20200922123829003"></p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200922123858594.png" alt="image-20200922123858594"></p>
+<h2 id="基变换"><a href="#基变换" class="headerlink" title="基变换"></a>基变换</h2><p>标准坐标系的基向量为$\vec {i}: \begin{bmatrix}1\\0 \end{bmatrix}$和$\vec {j}: \begin{bmatrix}0\\1 \end{bmatrix}$，假如詹妮弗有另一个坐标系：她的基向量为$\vec i \begin{bmatrix}2\\1 \end{bmatrix}$和$\vec j \begin{bmatrix}-1\\1 \end{bmatrix}$。</p>
+<p>对于同一个点$\begin{bmatrix}3\\2 \end{bmatrix}$来说他们所表示的形式不同，在詹妮弗的坐标系中表示为$\begin{bmatrix}\frac{5}{3}\\\frac{1}{3} \end{bmatrix}$。</p>
+<p>从标准坐标到詹尼佛的坐标系，我能可以得到一个线性变换$A:\begin{bmatrix}2&amp;-1\\1&amp;1 \end{bmatrix}$。</p>
+<p>如果想知道詹妮弗的坐标系中点$\begin{bmatrix}3\\2 \end{bmatrix}$在标准坐标系的位置，可以通过$\begin{bmatrix}2&amp;-1\\1&amp;1 \end{bmatrix}\begin{bmatrix}3\\2 \end{bmatrix}$得到。</p>
+<p>如果想知道标准坐标系中点$\begin{bmatrix}3\\2 \end{bmatrix}$在詹妮弗坐标系的位置，可以通过$\begin{bmatrix}2&amp;-1\\1&amp;1 \end{bmatrix}^{-1}\begin{bmatrix}3\\2 \end{bmatrix}$得到。</p>
+<p>具体的例子，90°旋转。</p>
+<p>在标准坐标系可以跟踪基向量的变化来体现：</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200922133429853.png" alt="image-20200922133429853"></p>
+<p>在詹妮弗的坐标系中如何表示旋转呢？首先将向量转换为标准坐标系的表示，然后左旋，最后再转换为詹妮弗的表示。</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200922133607455.png" alt="image-20200922133607455"></p>
+<p>所以我们可以得到对于詹妮弗坐标系的左旋线性变化的表示：</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200922133725994.png" alt="image-20200922133725994"></p>
+<p>所以表达式$A^{-1}MA$表示一种数学上的转移作用，$M$表示一种线性变换，$A$和$A^{-1}$表示坐标系的转换。</p>
+<h2 id="特征向量与特征值"><a href="#特征向量与特征值" class="headerlink" title="特征向量与特征值"></a>特征向量与特征值</h2><p>对于一些线性变化来说，存在一些向量在变换前后留在了张成的空间里，只是拉伸或收缩了一定比例，这些向量称为特征向量，拉伸收缩的比例称为特征值。</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/GIF-2020-11-21-17-46-40.gif" alt="GIF 2020-11-21 17-46-40"></p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200922152146060.png" alt="image-20200922152146060"></p>
+<p>一个三维空间的旋转，如果能找到特征值为1的特征向量，那么它就是旋转轴，因为旋转并不进行缩放，且旋转轴在线性变换中保持不变。</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200922152945686.png" alt="image-20200922152945686"></p>
+<blockquote>
+<p>特征向量的求解</p>
+</blockquote>
+<p>特征向量的概念，等号左侧表示矩阵向量的乘积，等号右侧表示向量数乘，可以将右侧重写为某个向量的乘积，$\vec I$为单位向量。</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200922152931670.png" alt="image-20200922152931670"></p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200922153357401.png" alt="image-20200922153357401"></p>
+<p>求解等式，就是使左侧的行列式det为0，$\lambda$就是特征值。</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200922153527410.png" alt="image-20200922153527410"></p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20201121180605568.png" alt="image-20201121180605568"></p>
+<p>求解$\lambda$对应的特征向量时，即求解满足$(A-\lambda I)\vec{X}&#x3D;0$的所有向量$\vec{X}$。</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20201121181300520.png" alt="image-20201121181300520"></p>
+<p>对应原始矩阵上所有落在$\begin{bmatrix} -1 \ 1 \end{bmatrix}$的向量被拉伸了2倍。</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20201121181819854.png" alt="image-20201121181819854"></p>
+<p>二维线性变换不一定存在特征向量，例如左旋90°，每个想都都发生了旋转，离开了张成空间。如果强行计算，会得到两个虚根：</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200922154353867.png" alt="image-20200922154353867"></p>
+<p>剪切变换的特征向量分布在x轴：</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200922154541171.png" alt="image-20200922154541171"></p>
+<p> 只有一个特征值，但是特征向量不一定只在一条直线上：</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200922154704668.png" alt="image-20200922154704668"></p>
+<blockquote>
+<p>特征基</p>
+</blockquote>
+<p>一组基向量构成的集合被称为一组特征基</p>
+<p>如果特征向量是基向量，它对应的矩阵是一个对角矩阵，矩阵的对角元是它们所属的特征值。</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20201121182906650.png" alt="image-20201121182906650"></p>
+<p>对角矩阵在求幂次时更方便求解，对应的幂次就是对角元的幂次。</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20201121183110982.png" alt="image-20201121183110982"></p>
+<p>而对于非对角矩阵的幂次求解就非常麻烦。</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20201121183319365.png" alt="image-20201121183319365"></p>
+<p>实际遇到对角矩阵的概率很低，但是我们可以通过基坐标变换来得到对角矩阵，前提有足够多的特征向量且可以张成整个空间，例如剪切变化就不行，应为它只有一个特征向量，无法进行坐标变换。</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20201121184627004.png" alt="image-20201121184627004"></p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200922155515737.png" alt="image-20200922155515737"></p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20201121202207724.png" alt="image-20201121202207724"></p>
+<p>求解特征值：</p>
+<p>$\begin{bmatrix}-\lambda&amp;1\1&amp;1-\lambda \end{bmatrix}\vec{X}&#x3D;0$</p>
+<div>
+$$
+\begin{bmatrix}-\lambda&1\\1&1-\lambda \end{bmatrix}\vec{X}=0 \\
+\lambda=\frac{1+\sqrt{5}}{2},\frac{1-\sqrt{5}}{2} \\
+将\lambda带入求导特征向量为:\vec{v_1}=\begin{bmatrix}2\\1+\sqrt{5}\end{bmatrix},\vec{v_2}=\begin{bmatrix}2\\1-\sqrt{5}\end{bmatrix}\\
+所以特征基为：P = \begin{bmatrix}2&2\\1+\sqrt{5}&1-\sqrt{5}\end{bmatrix}\\
+P^{-1}=\frac{1}{4\sqrt{5}}\begin{bmatrix}\sqrt{5}-1&2\\\sqrt{5}+1&-2\end{bmatrix}\\
+构造对角矩阵：M=P^{-1}AP=\frac{1}{2}\begin{bmatrix}7+3\sqrt{5}&0\\0&7-3\sqrt{5}\end{bmatrix}\\
+A=PMP^{-1}\\
+A^{n}=PMP^{-1}PMP^{-1}...PMP^{-1}=PM^{n}P^{-1}
+$$
+<div>
+
+
+
+
+<h2 id="抽象向量空间"><a href="#抽象向量空间" class="headerlink" title="抽象向量空间"></a>抽象向量空间</h2><p>线性的严格定义是：可加性和成比例性。</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200922163048868.png" alt="image-20200922163048868"></p>
+<p>和函数的求导类似，求导具有可加性和成比例性。</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200922163207612.png" alt="image-20200922163207612"></p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200922163213512.png" alt="image-20200922163213512"></p>
+<p>对于多项式的求导，我们也可以看成是矩阵的形式，将x的不同次幂看成基函数，这和多维空间的基向量类似。</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200922163437035.png" alt="image-20200922163437035"></p>
+<p>因为求导的可加性和成比例行，我们可以分别对每个基向量求导，从而得到左侧的矩阵。</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200922163605065.png" alt="image-20200922163605065"></p>
+<p>数学中有很多类似向量的事物，只要处理的对象具有数乘和相加的概念，都可以运行向量的基本性质。</p>
+<p>对于发明向量的数学家来说，他不用考虑其他所有类似的向量，他只需要给出向量数乘和加法必须遵守的规则即定理，那么所有满足这些定理的对象，就可以使用向量所拥有的性质。</p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200922164358498.png" alt="image-20200922164358498"></p>
+<p><img src="/blog/img/Blog/LinearAlgebra/image-20200922164421196.png" alt="image-20200922164421196"></p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>线性代数</p><p><a href="https://sanzo.top/blog/Blog/LinearAlgebra/">https://sanzo.top/blog/Blog/LinearAlgebra/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>Sanzo</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2021-06-13</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2021-06-13</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/blog/tags/linear-algebra/">linear algebra, </a><a class="link-muted" rel="tag" href="/blog/tags/math/">math </a></div></div><!--!--></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>Alipay</span><span class="qrcode"><img src="/blog/img/alipay.jpg" alt="Alipay"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>Wechat</span><span class="qrcode"><img src="/blog/img/wechat.jpg" alt="Wechat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/blog/Blog/linux-command/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">Linux常用命令</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/blog/Blog/raspi-setup/"><span class="level-item">树莓派配置</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div class="content twikoo" id="twikoo"></div><script src="https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js"></script><script>twikoo.init({
+      envId: 'https://sanzo-blog.netlify.app/.netlify/functions/twikoo'
+    });</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/blog/img/sanzo.png" alt="Hao Yuan"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Hao Yuan</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Shenyang, China</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/blog/archives"><p class="title">16</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Category</p><a href="/blog/categories"><p class="title">1</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/blog/tags"><p class="title">27</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/Sanzo00" target="_blank" rel="noopener">Follow</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/Sanzo00"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Email" href="mailto:arrangeman@163.com"><i class="fa fa-envelope"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/blog/atom.xml"><i class="fas fa-rss"></i></a></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#基础知识"><span class="level-left"><span class="level-item">1</span><span class="level-item">基础知识</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#行列式"><span class="level-left"><span class="level-item">1.1</span><span class="level-item">行列式</span></span></a></li><li><a class="level is-mobile" href="#余子式"><span class="level-left"><span class="level-item">1.2</span><span class="level-item">余子式</span></span></a></li><li><a class="level is-mobile" href="#代数余子式"><span class="level-left"><span class="level-item">1.3</span><span class="level-item">代数余子式</span></span></a></li><li><a class="level is-mobile" href="#伴随矩阵"><span class="level-left"><span class="level-item">1.4</span><span class="level-item">伴随矩阵</span></span></a></li><li><a class="level is-mobile" href="#矩阵的逆"><span class="level-left"><span class="level-item">1.5</span><span class="level-item">矩阵的逆</span></span></a></li></ul></li><li><a class="level is-mobile" href="#线性代数的本质"><span class="level-left"><span class="level-item">2</span><span class="level-item">线性代数的本质</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#什么是向量"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">什么是向量</span></span></a></li><li><a class="level is-mobile" href="#线性组合、张成空间、基"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">线性组合、张成空间、基</span></span></a></li><li><a class="level is-mobile" href="#矩阵与线性变换"><span class="level-left"><span class="level-item">2.3</span><span class="level-item">矩阵与线性变换</span></span></a></li><li><a class="level is-mobile" href="#矩阵乘法与线性变换复合的联系"><span class="level-left"><span class="level-item">2.4</span><span class="level-item">矩阵乘法与线性变换复合的联系</span></span></a></li><li><a class="level is-mobile" href="#三维空间的线性变化"><span class="level-left"><span class="level-item">2.5</span><span class="level-item">三维空间的线性变化</span></span></a></li><li><a class="level is-mobile" href="#行列式-1"><span class="level-left"><span class="level-item">2.6</span><span class="level-item">行列式</span></span></a></li><li><a class="level is-mobile" href="#逆矩阵、列空间、秩、零空间"><span class="level-left"><span class="level-item">2.7</span><span class="level-item">逆矩阵、列空间、秩、零空间</span></span></a></li><li><a class="level is-mobile" href="#非方阵、不同维度空间之间的线性变换"><span class="level-left"><span class="level-item">2.8</span><span class="level-item">非方阵、不同维度空间之间的线性变换</span></span></a></li><li><a class="level is-mobile" href="#点积与对偶性"><span class="level-left"><span class="level-item">2.9</span><span class="level-item">点积与对偶性</span></span></a></li><li><a class="level is-mobile" href="#叉积"><span class="level-left"><span class="level-item">2.10</span><span class="level-item">叉积</span></span></a></li><li><a class="level is-mobile" href="#线性代数看叉积"><span class="level-left"><span class="level-item">2.11</span><span class="level-item">线性代数看叉积</span></span></a></li><li><a class="level is-mobile" href="#基变换"><span class="level-left"><span class="level-item">2.12</span><span class="level-item">基变换</span></span></a></li><li><a class="level is-mobile" href="#特征向量与特征值"><span class="level-left"><span class="level-item">2.13</span><span class="level-item">特征向量与特征值</span></span></a></li><li><a class="level is-mobile" href="#抽象向量空间"><span class="level-left"><span class="level-item">2.14</span><span class="level-item">抽象向量空间</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/blog/js/toc.js" defer></script></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">Categories</h3><ul class="menu-list"><li><a class="level is-mobile" href="/blog/categories/Blog/"><span class="level-start"><span class="level-item">Blog</span></span><span class="level-end"><span class="level-item tag">15</span></span></a></li></ul></div></div></div><div class="card widget" data-type="subscribe-email"><div class="card-content"><div class="menu"><h3 class="menu-label">follow.it</h3><form action="https://api.follow.it/subscription-form/VkdEYjJIYUJXc3NWWEUrcTRQVzhYN2hxYVpHZDBOWlNTZDhBWW1TbmtmUkVKNDlobzZwMFVuY2ZKYXliT1BJTEtIV0NNaVY0bnVPTXJxVURJOEMyUWNTVndTc3ZEQXAwUndERG43bjB6RnVCOUxtVGVOTkVtWUlVZS9yVlNhZW18QTVaT1plUWxrNkt6b2tuYlFWdmFLN2pUOHBZeHB6VytMU0JEUFJwTFlhdz0=/8" method="post" target="_blank"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button" type="submit" value="Subscribe"></div></div></form></div></div></div><div class="column-right-shadow is-hidden-widescreen"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-10-03T02:40:48.000Z">2024-10-03</time></p><p class="title"><a href="/blog/Blog/easyconnect/">使用Docker封印EasyConnect</a></p><p class="categories"><a href="/blog/categories/Blog/">Blog</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-09-19T08:38:06.000Z">2024-09-19</time></p><p class="title"><a href="/blog/Blog/llm_inference/">LLM推理服务论文</a></p><p class="categories"><a href="/blog/categories/Blog/">Blog</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-07-14T07:25:56.000Z">2024-07-14</time></p><p class="title"><a href="/blog/Blog/yabai/">yabai: macOS的窗口管理</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-04-02T11:23:09.000Z">2024-04-02</time></p><p class="title"><a href="/blog/Blog/continue/">VSCode插件: Continue</a></p><p class="categories"><a href="/blog/categories/Blog/">Blog</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-02-28T00:06:50.000Z">2024-02-28</time></p><p class="title"><a href="/blog/Blog/rag/">RAG介绍</a></p><p class="categories"><a href="/blog/categories/Blog/">Blog</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">Archives</h3><ul class="menu-list"><li><a class="level is-mobile" href="/blog/archives/2024/10/"><span class="level-start"><span class="level-item">October 2024</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/blog/archives/2024/09/"><span class="level-start"><span class="level-item">September 2024</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/blog/archives/2024/07/"><span class="level-start"><span class="level-item">July 2024</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/blog/archives/2024/04/"><span class="level-start"><span class="level-item">April 2024</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/blog/archives/2024/02/"><span class="level-start"><span class="level-item">February 2024</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/blog/archives/2022/05/"><span class="level-start"><span class="level-item">May 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/blog/archives/2022/03/"><span class="level-start"><span class="level-item">March 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/blog/archives/2021/10/"><span class="level-start"><span class="level-item">October 2021</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/blog/archives/2021/07/"><span class="level-start"><span class="level-item">July 2021</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/blog/archives/2021/06/"><span class="level-start"><span class="level-item">June 2021</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">Tags</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/blog/tags/EasyConnect/"><span class="tag">EasyConnect</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/Inference/"><span class="tag">Inference</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/LLM/"><span class="tag">LLM</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/ML/"><span class="tag">ML</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/RAG/"><span class="tag">RAG</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/RaspberryPi/"><span class="tag">RaspberryPi</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/car/"><span class="tag">car</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/cmake/"><span class="tag">cmake</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/command/"><span class="tag">command</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/continue/"><span class="tag">continue</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/git/"><span class="tag">git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/linear-algebra/"><span class="tag">linear algebra</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/linux/"><span class="tag">linux</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/math/"><span class="tag">math</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/miniconda/"><span class="tag">miniconda</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/ollama/"><span class="tag">ollama</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/pi/"><span class="tag">pi</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/python/"><span class="tag">python</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/pytorch/"><span class="tag">pytorch</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/samba/"><span class="tag">samba</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/school/"><span class="tag">school</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/setup/"><span class="tag">setup</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/ubuntu/"><span class="tag">ubuntu</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/v2ray/"><span class="tag">v2ray</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/venv/"><span class="tag">venv</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/vpn/"><span class="tag">vpn</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/zsh/"><span class="tag">zsh</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/blog/"><img src="/blog/img/sanzo.png" alt="Sanzo Blog" height="28"></a><p class="is-size-7"><span>&copy; 2025 Sanzo</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p><p class="is-size-7">© 2024</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/blog/js/column.js"></script><script src="/blog/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/blog/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/mhchem.min.js" defer></script><script>window.addEventListener("load", function() {
+            document.querySelectorAll('[role="article"] > .content').forEach(function(element) {
+                renderMathInElement(element);
+            });
+        });</script><script type="text/javascript" id="MathJax-script" async>MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      },
+      svg: {
+        fontCache: 'global'
+      },
+      chtml: {
+        matchFontHeight: false
+      }
+    };</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script><!--!--><!--!--><!--!--><script src="/blog/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script data-pjax src="/blog/js/insight.js" defer></script><script data-pjax>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/blog/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>
