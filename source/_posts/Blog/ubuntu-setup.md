@@ -83,7 +83,7 @@ nohup ./v2ray run config.json > v2ray.log 2>&1 &
 
 [v2ray config.json配置](https://github.com/Sanzo00/files/blob/master/other/v2ray.json)
 
-![image-20211008182055367](/img/linux/image-20211008182055367.png)
+![image-20211008182055367](/img/Blog/linux/image-20211008182055367.png)
 
 
 
@@ -279,9 +279,9 @@ indicator-sysmonitor
 cpu: ({cpu} {cputemp}) gpu: ({nvgputemp}) mem: ({mem}) net: {net} {totalnet}
 ```
 
-![image-20211008210121275](/img/linux/image-20211008210121275.png)
+![image-20211008210121275](/img/Blog/linux/image-20211008210121275.png)
 
-![image-20211008205948437](/img/linux/image-20211008205948437.png)
+![image-20211008205948437](/img/Blog/linux/image-20211008205948437.png)
 
 
 
@@ -325,11 +325,11 @@ flameshot gui
 lspci | grep -i nvidia
 ```
 
-![image-20211008193000787](/img/linux/image-20211008193000787.png)
+![image-20211008193000787](/img/Blog/linux/image-20211008193000787.png)
 
 [下载驱动](https://www.nvidia.com/Download/index.aspx?lang=en-us)
 
-![image-20211008193044041](/img/linux/image-20211008193044041.png)
+![image-20211008193044041](/img/Blog/linux/image-20211008193044041.png)
 
 ```shell
 sudo apt install -y lightdm gcc make
@@ -354,7 +354,7 @@ sudo ./NVIDIA-Linux-x86_64-450.80.02.run -no-x-check -no-nouveau-check -no-openg
 nvidia-smi
 ```
 
-![image-20211008204151165](/img/linux/image-20211008204151165.png)
+![image-20211008204151165](/img/Blog/linux/image-20211008204151165.png)
 
 
 
@@ -385,7 +385,7 @@ sudo systemctl start graphical.target
 
 [下载cuda](https://developer.nvidia.com/cuda-toolkit-archive)，这里我选择的是cuda 11.2。
 
-![image-20211008204125042](/img/linux/image-20211008204125042.png)
+![image-20211008204125042](/img/Blog/linux/image-20211008204125042.png)
 
 ```bash
 wget https://developer.download.nvidia.com/compute/cuda/11.2.0/local_installers/cuda_11.2.0_460.27.04_linux.run
@@ -396,7 +396,7 @@ sudo sh cuda_11.2.0_460.27.04_linux.run
 
 回车取消勾选`Driver`，因为前面已经装过驱动，然后install，也可以在Options中自定义安装位置。
 
-![image-20211008204241869](/img/linux/image-20211008204241869.png)
+![image-20211008204241869](/img/Blog/linux/image-20211008204241869.png)
 
 在.bashrc文件中配置环境变量
 
@@ -412,7 +412,7 @@ source ～/.bashrc
 nvcc -V
 ```
 
-![image-20211008204439775](/img/linux/image-20211008204439775.png)
+![image-20211008204439775](/img/Blog/linux/image-20211008204439775.png)
 
 
 
@@ -431,11 +431,11 @@ sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64/
 
 在`~/NVIDIA_CUDA-11.2_Samples`下编译代码，然后运行cuda提供的例子。
 
-![image-20211008204814707](/img/linux/image-20211008204814707.png)
+![image-20211008204814707](/img/Blog/linux/image-20211008204814707.png)
 
 
 
-![image-20211008204917470](/img/linux/image-20211008204917470.png)
+![image-20211008204917470](/img/Blog/linux/image-20211008204917470.png)
 
 
 
