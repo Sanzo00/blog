@@ -299,7 +299,86 @@ LightRAG: Simple and Fast Retrieval-Augmented Generation [[paper]](https://arxiv
 
 ### Memory RAG
 
-#### Zep []
+
+
+
+
+#### MemoryBank [AAAI '24]
+
+MemoryBank: Enhancing Large Language Models with Long-Term Memory [[paper]](https://arxiv.org/abs/2305.10250) [[code]](https://github.com/zhongwanjun/MemoryBank-SiliconFriend)
+
+
+
+> 解决的问题
+
+为LLM提供记忆功能，捕捉用户画像，根据用户个性化需求提供更好的回复。
+
+
+
+> 核心idea
+
+MemoryBank分为三个模块：
+
+1. MemoryStorage：存储用户的历史聊天记录，并使用LLM为每个对话生成分层摘要，得到对话的概括和用户全局的画像。
+2. MemoryRetrieval：使用向量检索相关的记忆。
+3. MemoryUpdating：参考记忆遗忘曲线来模拟人类记忆，来遗忘在过去很长一段时间内都没有被访问的记忆，让AI回答的更加自然。
+
+
+
+![Overview of MemoryBank](/Users/sanzo/Desktop/blog/source/img/Blog/rag/image-20250620085024322.png)
+
+
+
+
+
+#### Mem0
+
+Mem0: Building Production-Ready AI Agents with Scalable Long-Term Memory [[code]](https://github.com/mem0ai/mem0) [[paper]](https://arxiv.org/pdf/2504.19413)
+
+
+
+
+
+#### A-MEM [Arxiv' 25]
+
+A-MEM: Agentic Memory for LLM Agents [[paper]](https://arxiv.org/abs/2502.12110) [[code]](https://github.com/agiresearch/A-mem)
+
+> 解决的问题
+
+Agent需要访问用户历史信息来提供更精确的回答。
+
+现有Agent Memory System在管理记忆依赖于固定的格式，无法应对具有复杂交互逻辑，以及知识动态更新的Agent workflow。
+
+
+
+> 核心Idea
+
+借鉴Zettelkasten笔记方法，通过创建原子笔记的方法记录新加入的信息，支持动态的创建知识链接，以及更新历史知识。
+
+Node Construction：为新加入的知识生成笔记，包括：时间戳，关键词，标签等属性。
+
+Link Generation：首先基于相似性检索top-k个笔记，然后使用LLM判断是否创建知识链接。
+
+Memory Evolution：使用LLM判断需要更新相似的历史知识。
+
+
+
+> 局限性
+
+- 性能依赖于LLM
+- 没有考虑多模态知识
+
+
+
+![Overview of A-MEM](/Users/sanzo/Desktop/blog/source/img/Blog/rag/image-20250620114717792.png)
+
+
+
+
+
+
+
+#### Zep [Arxiv '25]
 
 Zep: A Temporal Knowledge Graph Architecture for Agent Memory [[paper] ](https://arxiv.org/abs/2501.13956) [[code]](https://github.com/getzep/graphiti)
 
@@ -308,6 +387,10 @@ Zep: A Temporal Knowledge Graph Architecture for Agent Memory [[paper] ](https:/
 > 核心Idea
 
 > 执行流程
+
+
+
+
 
 #### DeepNote []
 
@@ -319,15 +402,11 @@ DeepNote: Note-Centric Deep Retrieval-Augmented Generation [[paper]](https://arx
 
 > 执行流程
 
-#### A-MEM []
 
-A-MEM: Agentic Memory for LLM Agents [[paper]](https://arxiv.org/abs/2502.12110) [[code]](https://github.com/agiresearch/A-mem)
 
-> 解决的问题
 
-> 核心Idea
 
-> 执行流程
+
 
 ### Other
 

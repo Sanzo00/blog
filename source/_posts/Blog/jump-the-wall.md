@@ -149,7 +149,7 @@ WantedBy=multi-user.target
 使用systemctl控制clash的运行：
 
 ```bash
-sudo systemctl emable clash
+sudo systemctl enable clash
 sudo systemctl status clash
 sudo systemctl start clash
 sudo systemctl restart clash
@@ -163,13 +163,6 @@ sudo systemctl stop clash
 ```bash
 wget google.com
 ```
-
-
-
-
-
-
-
 
 
 
