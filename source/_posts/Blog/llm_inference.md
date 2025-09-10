@@ -57,78 +57,11 @@ categories: Blog
 
 
 
-## Parrot [OSDI24]
-
-Parrot: Efficient Serving of LLM-based Applications with Semantic Variable. [pdf](https://www.usenix.org/system/files/osdi24-lin-chaofan.pdf) [code](https://github.com/microsoft/ParrotServe) [author](https://chaofanlin.com/)
-
-Parrot这篇论文的主要贡献是提出了**一个全新的推理workload：LLM Applications**。
-
-
-
-LLM Application是使用LLM来完成特定的任务（摘要，搜索，代码助手等），在一个应用中通常包含多个LLM请求。
-
-<img src="../../img/Blog/llm-inference/image-20240919165055080.png" alt="LLM Application的工作流程" style="zoom:50%;" />
 
 
 
 
-
-
-
-以往推理优化系统是**request-centric**，即对用户的应用是透明的，“一视同仁”的处理用户的请求，缺少**application-level**的信息。
-
-在LLM Application中，请求具有以下特点：
-
-1. 多个连续的LLM请求可能存在**依赖关系**。
-2. 即使在单个应用中，LLM请求可能具有不同的**调度偏好**。
-3. LLM的请求之前存在大量的**相似性**。
-
-
-
-<img src="../../img/Blog/llm-inference/image-20240919170523984.png" alt="多智能体应用中LLM请求的通信流程" style="zoom:50%;" />
-
-
-
-
-
-由于缺少application-level的信息，现有的推理优化主要有两个问题：
-
-1. 网络通信开销。
-2. 任务调度等待开销。
-
-
-
-![现有推理服务 vs. Parrot推理服务](/img/Blog/llm-inference/image-20240919165122842.png)
-
-
-
-
-
-
-
-<img src="../../img/Blog/llm-inference/image-20240919165139641.png" alt="Parrot的系统架构图" style="zoom:50%;" />
-
-
-
-Parrot设计了一个Semantic Variables的编程抽象，用来将用户的执行逻辑暴露给推理服务端。
-
-基于这个Semantic Variables可以获取到应用内的LLM请求的调用依赖关系，进而做一些系统上的优化，包括DAG-based analysis，Performance Objective Deduction，Application-Centric Scheduling等。
-
-
-
-<img src="../../img/Blog/llm-inference/image-20240919171157542.png" alt="使用Parrot写的代码例子" style="zoom:50%;" />
-
-
-
-
-
-
-
-
-
-
-
-## AquaPipe [SIGMOD**25**]
+## AquaPipe [SIGMOD25]
 
 AquaPipe: A Quality-Aware Pipeline for Knowledge Retrieval and Large Language Models [[paper]](https://dl.acm.org/doi/10.1145/3709661) 
 
@@ -142,15 +75,25 @@ AquaPipe: A Quality-Aware Pipeline for Knowledge Retrieval and Large Language Mo
 
 
 
-## Similarity-based
+## Similarity-based Retrieval
 
 
+
+### RetrievalAttention [Arxiv24]
+
+RetrievalAttention: Accelerating Long-Context LLM Inference via Vector Retrieval [[paper]](https://arxiv.org/abs/2409.10516) [[code]](https://github.com/microsoft/RetrievalAttention) 
+
+
+
+### RetroInfer [Arxiv25]
+
+RetroInfer: A Vector-Storage Approach for Scalable Long-Context LLM Inference [[paper]](https://arxiv.org/abs/2505.02922) [[code] [[author]](https://komorebi660.github.io)
 
 
 
 ### PQCache [SIGMOD25]
 
-PQCache: Product Quantization-based KVCache for Long Context LLM Inference [[paper]](https://arxiv.org/pdf/2407.12820v2) [[code]](https://github.com/HugoZHL/PQCache)
+PQCache: Product Quantization-based KVCache for Long Context LLM Inference [[paper]](https://arxiv.org/abs/2407.12820) [[code]](https://github.com/HugoZHL/PQCache)
 
 
 
@@ -235,27 +178,88 @@ Apt-Serve: Adaptive Request Scheduling on Hybrid Cache for Scalable LLM Inferenc
 
 
 
-## Training
-
-
-
-[[paper]](https://arxiv.org/pdf/2407.12117v3)
-
-
-
-
-
-Malleus: Straggler-Resilient Hybrid Parallel Training of Large-scale Models via Malleable Data and Model Parallelization 
-
-
-
 
 
 ## Scheduling
 
 
 
-### Preble [ICLR '25]
+
+
+### Parrot [OSDI24]
+
+Parrot: Efficient Serving of LLM-based Applications with Semantic Variable. [[pdf]](https://www.usenix.org/system/files/osdi24-lin-chaofan.pdf) [[code]](https://github.com/microsoft/ParrotServe) [[author]](https://chaofanlin.com/)
+
+Parrot这篇论文的主要贡献是提出了**一个全新的推理workload：LLM Applications**。
+
+
+
+LLM Application是使用LLM来完成特定的任务（摘要，搜索，代码助手等），在一个应用中通常包含多个LLM请求。
+
+<img src="../../img/Blog/llm-inference/image-20240919165055080.png" alt="LLM Application的工作流程" style="zoom:50%;" />
+
+
+
+
+
+
+
+以往推理优化系统是**request-centric**，即对用户的应用是透明的，“一视同仁”的处理用户的请求，缺少**application-level**的信息。
+
+在LLM Application中，请求具有以下特点：
+
+1. 多个连续的LLM请求可能存在**依赖关系**。
+2. 即使在单个应用中，LLM请求可能具有不同的**调度偏好**。
+3. LLM的请求之前存在大量的**相似性**。
+
+
+
+<img src="../../img/Blog/llm-inference/image-20240919170523984.png" alt="多智能体应用中LLM请求的通信流程" style="zoom:50%;" />
+
+
+
+
+
+由于缺少application-level的信息，现有的推理优化主要有两个问题：
+
+1. 网络通信开销。
+2. 任务调度等待开销。
+
+
+
+![现有推理服务 vs. Parrot推理服务](/img/Blog/llm-inference/image-20240919165122842.png)
+
+
+
+
+
+
+
+<img src="../../img/Blog/llm-inference/image-20240919165139641.png" alt="Parrot的系统架构图" style="zoom:50%;" />
+
+
+
+Parrot设计了一个Semantic Variables的编程抽象，用来将用户的执行逻辑暴露给推理服务端。
+
+基于这个Semantic Variables可以获取到应用内的LLM请求的调用依赖关系，进而做一些系统上的优化，包括DAG-based analysis，Performance Objective Deduction，Application-Centric Scheduling等。
+
+
+
+<img src="../../img/Blog/llm-inference/image-20240919171157542.png" alt="使用Parrot写的代码例子" style="zoom:50%;" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Preble [ICLR25]
 
 Preble: Efficient Distributed Prompt Scheduling for LLM Serving [[paper]](https://arxiv.org/pdf/2407.00023)  [[code]](https://github.com/WukLab/preble)
 
@@ -291,7 +295,19 @@ Preble包含以下设计：
 
 
 
-### TaiChi [Arxiv '25]
+
+
+
+
+
+
+
+
+
+
+
+
+### TaiChi [Arxiv25]
 
 Prefill-Decode Aggregation or Disaggregation? Unifying Both for Goodput-Optimized LLM Serving [[paper]](https://www.arxiv.org/abs/2508.01989)
 
@@ -335,9 +351,27 @@ PD-aggregation和PD-disaggregation适应不同的SLO，无法适用于TTFT和TPO
 
 
 
-
-
 ![The system overview of TaiChi.](/img/Blog/llm-inference/image-20250904175536385.png)
+
+
+
+
+
+## Agent
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -424,3 +458,26 @@ LLM的注意力计算，保证所有token的注意力之和为1，即使当前to
    - 对于RoPE，在应用 rotray 变化前缓存 key tensor，在加载的时候对其rotray。
 
    - 对于ALiBi，在注意力分数上添加一个linear bias。
+
+
+
+
+
+
+
+## Training
+
+
+
+### MEMO [SIGMOD25]
+
+MEMO: Fine-grained Tensor Management For Ultra-long Context LLM Training [[paper]](https://arxiv.org/pdf/2407.12117v3)
+
+
+
+
+
+### Malleus [SIGMOD25]
+
+Malleus: Straggler-Resilient Hybrid Parallel Training of Large-scale Models via Malleable Data and Model Parallelization [[paper]](https://arxiv.org/pdf/2410.13333)
+
