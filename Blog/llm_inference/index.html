@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>LLM推理服务论文 - Sanzo Blog</title><link rel="manifest" href="/blog/manifest.json"><meta name="application-name" content="Sanzo Blog"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Sanzo Blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="记录一些LLM推理优化相关的论文"><meta property="og:type" content="blog"><meta property="og:title" content="LLM推理服务论文"><meta property="og:url" content="https://sanzo.top/blog/Blog/llm_inference/"><meta property="og:site_name" content="Sanzo Blog"><meta property="og:description" content="记录一些LLM推理优化相关的论文"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/llm-inference/image-20250628201826548.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/llm-inference/image-20250628202224666.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/llm-inference/image-20250628202419202.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/llm-inference/image-20250628212757321.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/llm-inference/image-20240919165055080.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/llm-inference/image-20240919170523984.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/llm-inference/image-20240919165122842.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/llm-inference/image-20240919165139641.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/llm-inference/image-20240919171157542.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/llm-inference/image-20250903100918962.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/llm-inference/image-20250904175536385.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/llm-inference/image-20250615205757413.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/llm-inference/image-20250615205218195.png"><meta property="og:image" content="https://sanzo.top/blog/img/Blog/llm-inference/image-20250615213712847.png"><meta property="article:published_time" content="2024-09-19T08:38:06.000Z"><meta property="article:modified_time" content="2025-09-03T08:38:06.000Z"><meta property="article:author" content="Sanzo"><meta property="article:tag" content="LLM"><meta property="article:tag" content="Inference"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://sanzo.top/blog/img/Blog/llm-inference/image-20250628201826548.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sanzo.top/blog/Blog/llm_inference/"},"headline":"LLM推理服务论文","image":["https://sanzo.top/blog/img/Blog/llm-inference/image-20250628201826548.png","https://sanzo.top/blog/img/Blog/llm-inference/image-20250628202224666.png","https://sanzo.top/blog/img/Blog/llm-inference/image-20250628202419202.png","https://sanzo.top/blog/img/Blog/llm-inference/image-20250628212757321.png","https://sanzo.top/blog/img/Blog/llm-inference/image-20240919165055080.png","https://sanzo.top/blog/img/Blog/llm-inference/image-20240919170523984.png","https://sanzo.top/blog/img/Blog/llm-inference/image-20240919165122842.png","https://sanzo.top/blog/img/Blog/llm-inference/image-20240919165139641.png","https://sanzo.top/blog/img/Blog/llm-inference/image-20240919171157542.png","https://sanzo.top/blog/img/Blog/llm-inference/image-20250903100918962.png","https://sanzo.top/blog/img/Blog/llm-inference/image-20250904175536385.png","https://sanzo.top/blog/img/Blog/llm-inference/image-20250615205757413.png","https://sanzo.top/blog/img/Blog/llm-inference/image-20250615205218195.png","https://sanzo.top/blog/img/Blog/llm-inference/image-20250615213712847.png"],"datePublished":"2024-09-19T08:38:06.000Z","dateModified":"2025-09-03T08:38:06.000Z","author":{"@type":"Person","name":"Sanzo"},"publisher":{"@type":"Organization","name":"Sanzo Blog","logo":{"@type":"ImageObject","url":"https://sanzo.top/img/sanzo.png"}},"description":"记录一些LLM推理优化相关的论文"}</script><link rel="canonical" href="https://sanzo.top/blog/Blog/llm_inference/"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/blog/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><script>var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?b59d4dcd7ecbf66eec1a1b7ff331e1a9";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();</script><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=G-82SWX0KLXT" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+        gtag('config', 'G-82SWX0KLXT');</script><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><meta name="follow.it-verification-code" content="ryvLrPRCwHTCNPCEl4LW"><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/blog/atom.xml" title="Sanzo Blog" type="application/atom+xml">
+</head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/blog/"><img src="/blog/img/sanzo.png" alt="Sanzo Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/blog/">Home</a><a class="navbar-item" href="/blog/archives">Archives</a><a class="navbar-item" href="/blog/categories">Categories</a><a class="navbar-item" href="/blog/tags">Tags</a><a class="navbar-item" href="https://sanzo.top/">About</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">LLM推理服务论文</h1><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><i class="far fa-calendar-alt"> </i><time datetime="2024-09-19T08:38:06.000Z" title="2024-09-19T08:38:06.000Z">2024-09-19</time></span><span class="level-item is-hidden-mobile"><i class="far fa-calendar-check"> </i><time datetime="2025-09-03T08:38:06.000Z" title="2025-09-03T08:38:06.000Z">2025-09-03</time></span><span class="level-item"><i class="far fa-folder-open has-text-grey"></i> <a class="link-muted" href="/blog/categories/Blog/">Blog</a></span><span class="level-item"><i class="far fa-clock has-text-grey"></i> 26 minutes read (About 3834 words)</span></div></div><div class="content"><p>记录一些LLM推理优化相关的论文</p>
+<span id="more"></span>
+
+
+
+
+
+<h2 id="FlashAttention"><a href="#FlashAttention" class="headerlink" title="FlashAttention"></a>FlashAttention</h2><h2 id="PageAttention"><a href="#PageAttention" class="headerlink" title="PageAttention"></a>PageAttention</h2><h2 id="RadixAttention"><a href="#RadixAttention" class="headerlink" title="RadixAttention"></a>RadixAttention</h2><h2 id="RingAttention"><a href="#RingAttention" class="headerlink" title="RingAttention"></a>RingAttention</h2><h2 id="RAGCache-Arxiv24"><a href="#RAGCache-Arxiv24" class="headerlink" title="RAGCache [Arxiv24]"></a>RAGCache [Arxiv24]</h2><h2 id="Cache-Craft-SIGMOD25"><a href="#Cache-Craft-SIGMOD25" class="headerlink" title="Cache-Craft [SIGMOD25]"></a>Cache-Craft [SIGMOD25]</h2><h2 id="CacheBlend-EuroSys25"><a href="#CacheBlend-EuroSys25" class="headerlink" title="CacheBlend [EuroSys25]"></a>CacheBlend [EuroSys25]</h2><h2 id="Superposition-ICLR24"><a href="#Superposition-ICLR24" class="headerlink" title="Superposition [ICLR24]"></a>Superposition [ICLR24]</h2><h2 id="AquaPipe-SIGMOD25"><a href="#AquaPipe-SIGMOD25" class="headerlink" title="AquaPipe [SIGMOD25]"></a>AquaPipe [SIGMOD25]</h2><p>AquaPipe: A Quality-Aware Pipeline for Knowledge Retrieval and Large Language Models <a target="_blank" rel="noopener" href="https://dl.acm.org/doi/10.1145/3709661">[paper]</a> </p>
+<h2 id="Similarity-based-Retrieval"><a href="#Similarity-based-Retrieval" class="headerlink" title="Similarity-based Retrieval"></a>Similarity-based Retrieval</h2><h3 id="RetrievalAttention-Arxiv24"><a href="#RetrievalAttention-Arxiv24" class="headerlink" title="RetrievalAttention [Arxiv24]"></a>RetrievalAttention [Arxiv24]</h3><p>RetrievalAttention: Accelerating Long-Context LLM Inference via Vector Retrieval <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2409.10516">[paper]</a> <a target="_blank" rel="noopener" href="https://github.com/microsoft/RetrievalAttention">[code]</a> </p>
+<h3 id="RetroInfer-Arxiv25"><a href="#RetroInfer-Arxiv25" class="headerlink" title="RetroInfer [Arxiv25]"></a>RetroInfer [Arxiv25]</h3><p>RetroInfer: A Vector-Storage Approach for Scalable Long-Context LLM Inference <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2505.02922">[paper]</a> [[code] <a target="_blank" rel="noopener" href="https://komorebi660.github.io/">[author]</a></p>
+<h3 id="PQCache-SIGMOD25"><a href="#PQCache-SIGMOD25" class="headerlink" title="PQCache [SIGMOD25]"></a>PQCache [SIGMOD25]</h3><p>PQCache: Product Quantization-based KVCache for Long Context LLM Inference <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2407.12820">[paper]</a> <a target="_blank" rel="noopener" href="https://github.com/HugoZHL/PQCache">[code]</a></p>
+<p>PQCache解决的LLM在long context下的推理效率问题。</p>
+<p>长上下文推理对显存需求带来了挑战，如何在有限的显存空间实现高效的推理，同时保存高的输出质量，是一个被广泛关注的问题。</p>
+<p>一个符合直觉的方法：selective attention，通过选择部分token进行注意力计算，显著降低了对内存和计算的需求。</p>
+<p>现有selective attention方法可以分为：KV Cache dropping (Scissorhands, StreamingLLM [ICLR24], H2O [NIPS23])，KV Cache offloading (InfLLM [arxiv24] SparQAttention) 两类。</p>
+<p>如下图所示，PQCache发现selective attention的执行和传统信息检索的Product Quantization的过程很像。</p>
+<p>在LLM的注意力计算过程中，向量Q和所有的K进行相似度计算，然后经过softmax并与V加权求和得到输出X。</p>
+<p>Q和K的相似度计算和信息检索中根据用户问题检索相似的top-k个向量的过程基本一致。</p>
+<p><img src="/blog/img/Blog/llm-inference/image-20250628201826548.png" alt="Information retrieval vs. LLM inference with seletive attention"></p>
+<p>本文选择了开销比较低的Product Quantization来管理KV Cache。</p>
+<p>PQ的索引构建和搜索过程如下图所示。</p>
+<blockquote>
+<p>PQ Construction：</p>
+</blockquote>
+<ol>
+<li>将每个KV Cache向量划分为m个子向量。</li>
+<li>对所有KV Cache的每个子向量进行聚类，生成$2^b$个质心。</li>
+<li>原来KV Cache向量对应的m个子向量编码为距离最近的质心id。</li>
+</ol>
+<blockquote>
+<p>PQ Searching:</p>
+</blockquote>
+<ol>
+<li>查询Q向量同样被划分为M个子向量。</li>
+<li>每个子向量和对应的空间中$2^b$个向量计算相似度。</li>
+<li>根据相似度计算原始向量与Q的相似性得分，选取TopK得分的向量。</li>
+</ol>
+<p><img src="/blog/img/Blog/llm-inference/image-20250628202224666.png" alt="PQ construction and serarching"></p>
+<p>PQCache的整体执行流程如下图所示：</p>
+<ol>
+<li>在Prefilling阶段，正常计算得到每个输入token的KV Cache，并异步的卸载到CPU。</li>
+<li>CPU收到KV Cache之后，构建PQ用于后续检索。</li>
+<li>在Decoding阶段，加载Centroids和PQ Codes，并计算TopK K向量。</li>
+<li>根据计算的TopK向量，加载对应KV向量，并在GPU执行注意力计算。</li>
+</ol>
+<p>在实现中，PQCache的KV Cache包含三种：initial tokens，middle tokens，and local tokens.</p>
+<p>StreamingLLM中发现attention sink的现象，即initial tokens受到更多的注意力关注，对模型的回答质量有很大的影响。</p>
+<p>local tokens表示最近计算的token。middle tokens表示历史KV Cache保存在CPU中。</p>
+<p>PQCache将initial和local tokens保存在GPU，并维护一个窗口，超过窗口的local token被卸载到CPU。</p>
+<p><img src="/blog/img/Blog/llm-inference/image-20250628202419202.png" alt="Overview of PQCache"></p>
+<p><img src="/blog/img/Blog/llm-inference/image-20250628212757321.png" alt="PQCache v.s. sequential scheduling."></p>
+<h2 id="Apt-Serve-SIGMOD25"><a href="#Apt-Serve-SIGMOD25" class="headerlink" title="Apt-Serve [SIGMOD25]"></a>Apt-Serve [SIGMOD25]</h2><p>Apt-Serve: Adaptive Request Scheduling on Hybrid Cache for Scalable LLM Inference Serving <a target="_blank" rel="noopener" href="https://github.com/eddiegaoo/Apt-Serve">[code]</a> <a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2504.07494">[paper]</a></p>
+<h2 id="Scheduling"><a href="#Scheduling" class="headerlink" title="Scheduling"></a>Scheduling</h2><h3 id="Parrot-OSDI24"><a href="#Parrot-OSDI24" class="headerlink" title="Parrot [OSDI24]"></a>Parrot [OSDI24]</h3><p>Parrot: Efficient Serving of LLM-based Applications with Semantic Variable. <a target="_blank" rel="noopener" href="https://www.usenix.org/system/files/osdi24-lin-chaofan.pdf">[pdf]</a> <a target="_blank" rel="noopener" href="https://github.com/microsoft/ParrotServe">[code]</a> <a target="_blank" rel="noopener" href="https://chaofanlin.com/">[author]</a></p>
+<p>Parrot这篇论文的主要贡献是提出了<strong>一个全新的推理workload：LLM Applications</strong>。</p>
+<p>LLM Application是使用LLM来完成特定的任务（摘要，搜索，代码助手等），在一个应用中通常包含多个LLM请求。</p>
+<img src="../../img/Blog/llm-inference/image-20240919165055080.png" alt="LLM Application的工作流程" style="zoom:50%;" />
+
+
+
+
+
+
+
+<p>以往推理优化系统是<strong>request-centric</strong>，即对用户的应用是透明的，“一视同仁”的处理用户的请求，缺少<strong>application-level</strong>的信息。</p>
+<p>在LLM Application中，请求具有以下特点：</p>
+<ol>
+<li>多个连续的LLM请求可能存在<strong>依赖关系</strong>。</li>
+<li>即使在单个应用中，LLM请求可能具有不同的<strong>调度偏好</strong>。</li>
+<li>LLM的请求之前存在大量的<strong>相似性</strong>。</li>
+</ol>
+<img src="../../img/Blog/llm-inference/image-20240919170523984.png" alt="多智能体应用中LLM请求的通信流程" style="zoom:50%;" />
+
+
+
+
+
+<p>由于缺少application-level的信息，现有的推理优化主要有两个问题：</p>
+<ol>
+<li>网络通信开销。</li>
+<li>任务调度等待开销。</li>
+</ol>
+<p><img src="/blog/img/Blog/llm-inference/image-20240919165122842.png" alt="现有推理服务 vs. Parrot推理服务"></p>
+<img src="../../img/Blog/llm-inference/image-20240919165139641.png" alt="Parrot的系统架构图" style="zoom:50%;" />
+
+
+
+<p>Parrot设计了一个Semantic Variables的编程抽象，用来将用户的执行逻辑暴露给推理服务端。</p>
+<p>基于这个Semantic Variables可以获取到应用内的LLM请求的调用依赖关系，进而做一些系统上的优化，包括DAG-based analysis，Performance Objective Deduction，Application-Centric Scheduling等。</p>
+<img src="../../img/Blog/llm-inference/image-20240919171157542.png" alt="使用Parrot写的代码例子" style="zoom:50%;" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h3 id="Preble-ICLR25"><a href="#Preble-ICLR25" class="headerlink" title="Preble [ICLR25]"></a>Preble [ICLR25]</h3><p>Preble: Efficient Distributed Prompt Scheduling for LLM Serving <a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2407.00023">[paper]</a>  <a target="_blank" rel="noopener" href="https://github.com/WukLab/preble">[code]</a></p>
+<p>现有推理系统的目标是充分利用GPU的计算资源，在调度请求时忽略了promt的共享前缀，因此存在冗余的计算开销。此外，简单的将共享前缀请求分配到同一个实例，会造成负载的不均衡。</p>
+<p>Preble针对分布式推理场景，提出了一个prompt-aware的请求调度方法。</p>
+<p>Preble首先对LLM workload进行分析，有以下4个观察：</p>
+<ul>
+<li><strong>Prompt 的长度远大于 Output</strong>：在真实 workload 中，Prompt 比 Output 长 4–2494 倍。</li>
+<li><strong>Prompt 高度共享</strong>：85%–97% 的前缀可被复用。</li>
+<li><strong>共享序列频繁复用</strong>：常见前缀平均被 8.6–126 个请求使用，但不同 workload 差异明显。</li>
+<li><strong>请求模式极端不均</strong>：请求到达间隔从微秒到数百秒不等，系统需同时处理高并发和稀疏请求。</li>
+</ul>
+<p>Preble包含以下设计：</p>
+<ul>
+<li>globa-local两层的调度机制，global调度将请求分配到对应的实例，local调度负责在实例内部迭代的调度请求。</li>
+<li>global调度策略如下：<ul>
+<li>如果缓存命中的token数量大于未命中，将请求分配到具有最长共享前缀的实例。如果有多个实例满足，则优先分配到负载最少的实例。</li>
+<li>如果缓存命中token数量小于未命中，将请求分配到最小cost的实例，cost计算逻辑如下：<ul>
+<li>实例的负载，计算一定时间窗口内，所有请求的计算负载，包括prefill和decode，根据长度计算。</li>
+<li>驱逐开销，插入新请求可能要驱逐一些节点，计算被驱逐节点的开销。</li>
+<li>请求的prefill开销，prefill未命中token的计算开销。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>为了缓解实例之间的负载不均衡问题，preble采用了负载调整方法：<ul>
+<li>如果实例之间的负载超过一定阈值，负载大的请求调度到负载小的实例上。</li>
+<li>将频繁复用的前缀复制到多个机器，减轻单个实例的过载问题。</li>
+</ul>
+</li>
+<li>global根据prefill和decode的负载，优先将请求分配到decode重的实例。</li>
+<li>为了保证调度的公平，local调度根据cache token的数量对请求划分多个组，每次按比例的从每个组选择请求，cache命中多的组多选。</li>
+</ul>
+<p><img src="/blog/img/Blog/llm-inference/image-20250903100918962.png" alt="preble architecture."></p>
+<h3 id="TaiChi-Arxiv25"><a href="#TaiChi-Arxiv25" class="headerlink" title="TaiChi [Arxiv25]"></a>TaiChi [Arxiv25]</h3><p>Prefill-Decode Aggregation or Disaggregation? Unifying Both for Goodput-Optimized LLM Serving <a target="_blank" rel="noopener" href="https://www.arxiv.org/abs/2508.01989">[paper]</a></p>
+<p>本文对PD-aggregation和PD-disaggregation进行了详细的总结对比，并提出了一个PD-aggregation和PD-disaggregationd的混合推理方法，以实现LLM推理 Goodput的最大化。</p>
+<blockquote>
+<p>Motivation</p>
+</blockquote>
+<p>PD-aggregation和PD-disaggregation适应不同的SLO，无法适用于TTFT和TPOT均衡的SLO。</p>
+<ul>
+<li>PD-aggregation适合“TTFT严格，TPOT宽松”的SLO。在PD-aggregation中，所有实例参与prefill，因此可以实现较低的TTFT表现；但是由于prefill和decode相互干扰导致TPOT较高。</li>
+<li>PD-disaggregation适合“TPOP严格，TTFT宽松”的SLO。在PD-disaggregation中，prefill和decode有不同的实例单独服务，decode不再受prefill的影响，因此TPOT较低；但是由于只有部分实例参与prefill，因此TTFT较高；</li>
+</ul>
+<blockquote>
+<p>Observation</p>
+</blockquote>
+<ul>
+<li>PD-aggregation的高TPOT来自prefill的干扰：compute-bound linear operations（矩阵乘），其中TPOT与干扰的密度呈线性关系。（干扰密度&#x3D;prefill tokens &#x2F; output tokens）。在PD-aggregation中，chunk size是个关键参数，减少chunk size可以减轻prefill和decode的干扰，从而降低TPOT；但同时增加了prefill迭代的次数从而增加了TTFT。（section 2.3）</li>
+<li>PD-disaggregation的高TTFT来自于请求的等待开销（同时包括prefill和decode的等待开销）。当调整PD的实例比例，TTFT随着P的下降后上升。这是因为增加P实例可以同时处理更多的prefiil任务，但随着D数量的减少，使得decode任务的排队时间大大上升，进而导致整体的TTFT延迟升高。（section 2.3.2）</li>
+<li>通过调度资源可以实现TTFT和TPOT延迟的转移，例如，在PD-aggregation中，增加chunk size可以将TTFT的延迟转移到TPOT上，因为增加chunk size可以为prefill提供更多的空间，代价是增加了TPOT的延迟。同样，在PD-disaggregation中，增加更多的decode实例，可以将TPOT的延迟转移到TTFT上。(section 2.4)</li>
+</ul>
+<blockquote>
+<p>Challenge</p>
+</blockquote>
+<ul>
+<li><p>现有LLM推理服务在PD-aggregation和PD-disagregation中二选一，虽然可以通过增加chunk size和调整PD实例数量来实现延迟转移，但是不够灵活，不支持request-level 延迟转移。（2.5 Challenge 1）</p>
+</li>
+<li><p>request-level的TPOT降级同时受到批处理和输出token长度不确定的影响。增加chunk size虽然可以将TTFT延迟转移到TPOT，但是可能导致同一批次一些decode请求的TPOT超过SLO；短输出长度的请求更容易受到PD干扰（output tokens是干扰密度的分母，对干扰更加敏感）。（2.5 Challenge 2）</p>
+</li>
+<li><p>request-level的TTFT的降级需求不直接，需要同时考虑执行时间和排队时间。prefill的长度比较分散（2k-16k不等），对于短请求的TTFT容忍度更高可以被优先降级。然而如果请求排队时间过长，那么他降级的空间就会大幅减少。（2.5 Challenge 3）</p>
+</li>
+</ul>
+<blockquote>
+<p>Design</p>
+</blockquote>
+<ul>
+<li>TaiChi将实例划分为两部分：P-heavy（大chunk size）和D-heavy（小chunk size），每个实例都有一个控制chunk size的slider（$S_P$, $S_D$），通过调节slider可以动态的切换到PD-aggregation（$S_P$&#x3D;$S_D$&#x3D;chunk size）和PD-disaggregation（$S_D$排除prefill，$S_P$&#x3D;maxinum）。其外，TaiChi通过来调节P-heavy和D-heavy的比例（$R_{PD}$）以适应不同的SLO。</li>
+<li>提出Flowing Decode Scheduling来实现request-level TPOT降级（Challenge 2），核心思想是在P-heavy和D-heavy之间动态的迁移需要降级的请求。首先，Decode任务优先分配到D-heavy实例，这样可以防止短输出的请求放到P-heavy超过SLO。当内存占用超过一定阈值，选择当前输出长度最长的请求进行降级（长度越长对TPOT相对更加不敏感）。</li>
+<li>TPOT-aware Decode Backflow，TaiChi会监控从D-heavy迁移到P-heavy的请求，如果他们的TPOT超过一定的阈值（$\alpha \times$ SLO），则将这些请求重新迁移到D-heavy。Backflow这个方法是一个保障策略，如果backflow发生的比较频繁，说明当前的D-heavy过载，最好的方法通过调整$R_{PD}$来增加D-heavy的实例。</li>
+<li>Length-aware Prefill Scheduling，核心思想是优先将短提示词调度到D-heavy，使得P-heavy具有更多的资源处理SLO更加严格的长提示词。</li>
+</ul>
+<p><img src="/blog/img/Blog/llm-inference/image-20250904175536385.png" alt="The system overview of TaiChi."></p>
+<h2 id="Agent"><a href="#Agent" class="headerlink" title="Agent"></a>Agent</h2><h2 id="Sparse-Attention-Long-context"><a href="#Sparse-Attention-Long-context" class="headerlink" title="Sparse Attention&#x2F;Long context"></a>Sparse Attention&#x2F;Long context</h2><h3 id="LM-infinite"><a href="#LM-infinite" class="headerlink" title="LM-infinite"></a>LM-infinite</h3><h3 id="Longformer-Arxiv20"><a href="#Longformer-Arxiv20" class="headerlink" title="Longformer [Arxiv20]"></a>Longformer [Arxiv20]</h3><h3 id="StreamingLLM-ICLR24"><a href="#StreamingLLM-ICLR24" class="headerlink" title="StreamingLLM [ICLR24]"></a>StreamingLLM [ICLR24]</h3><p>Efficient Streaming Language Models with Attention Sinks <a target="_blank" rel="noopener" href="https://github.com/mit-han-lab/streaming-llm">[code]</a>  <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2309.17453">[paper]</a></p>
+<blockquote>
+<p>解决的问题</p>
+</blockquote>
+<p>LLM在长上下文的效率和效益的问题：</p>
+<ol>
+<li>长上下文的计算和内存开销大。</li>
+<li>LLM在上下文长度超过预训练长度时，生成质量差。</li>
+</ol>
+<blockquote>
+<p>核心idea</p>
+</blockquote>
+<p><img src="/blog/img/Blog/llm-inference/image-20250615205757413.png" alt="图1:对比4中不同的注意力计算方法"></p>
+<ol>
+<li><strong>Dense Attention</strong>：计算复杂度高，当上下文长度超过预训练长度，模型表现差。</li>
+<li><strong>Window Attention</strong>：计算复杂度低，当上下文长度超过缓存长度（initial token）被驱逐时，模型表现差。</li>
+<li><strong>Sliding Window w&#x2F; Re-computation</strong>：计算复杂度中等，通过重新计算，保留了initial token的影响，模型表现良好。</li>
+<li><strong>StreamingLLM</strong>：在<strong>Window Attention</strong>的基础上，引入了对initial token的注意力计算，兼顾推理速度和模型生成质量。</li>
+</ol>
+<p>Streamllm的方法主要来自于一个观察：</p>
+<p><strong>”Attention sink“</strong>：作者发现LLM对初始token的注意力关注较高。</p>
+<p><img src="/blog/img/Blog/llm-inference/image-20250615205218195.png" alt="图2显示了 Llama-2-7B 在处理多个短句时的平均注意力模式。从可视化结果来看，前两层主要呈现局部注意力，偏向关注临近的 token；而从第2层起，模型普遍对句首 token 表现出异常高的关注度。这种现象说明了高层注意力容易集中在起始位置，可能引发注意力偏置问题（attention sink）。"></p>
+<p>作者对<strong>Attention sink</strong>给了一个解释：</p>
+<p>LLM的注意力计算，保证所有token的注意力之和为1，即使当前token只需要根据自己就可以推测出下一个token，由于softmax的设计，还是需要将一些注意力分散到其他token上去。</p>
+<p>由于LLM的自回归特性，开始的token可以被后面所有tokne注意力到，因此LLM对initial token的关注更高，进而在训练的过程中，赋予inital token特殊的含义。</p>
+<blockquote>
+<p>细节</p>
+</blockquote>
+<ol>
+<li><p>按照在cache中的位置，重新分配token的位置信息，以保成相对位置的正确性。</p>
+<p>如下图所示，当生成 token 9的时候，每个token的位置为[0, 1, 2, 3, 4, 5, 6, 7]而不是[0, 1, 2, 3, 6, 7, 8, 9]。</p>
+<p><img src="/blog/img/Blog/llm-inference/image-20250615213712847.png" alt="图3：StreamingLLM的的KV Cache"></p>
+</li>
+<li><p>key tensor的缓存和使用</p>
+<ul>
+<li><p>对于RoPE，在应用 rotray 变化前缓存 key tensor，在加载的时候对其rotray。</p>
+</li>
+<li><p>对于ALiBi，在注意力分数上添加一个linear bias。</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="Training"><a href="#Training" class="headerlink" title="Training"></a>Training</h2><h3 id="MEMO-SIGMOD25"><a href="#MEMO-SIGMOD25" class="headerlink" title="MEMO [SIGMOD25]"></a>MEMO [SIGMOD25]</h3><p>MEMO: Fine-grained Tensor Management For Ultra-long Context LLM Training <a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2407.12117v3">[paper]</a></p>
+<h3 id="Malleus-SIGMOD25"><a href="#Malleus-SIGMOD25" class="headerlink" title="Malleus [SIGMOD25]"></a>Malleus [SIGMOD25]</h3><p>Malleus: Straggler-Resilient Hybrid Parallel Training of Large-scale Models via Malleable Data and Model Parallelization <a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2410.13333">[paper]</a></p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>LLM推理服务论文</p><p><a href="https://sanzo.top/blog/Blog/llm_inference/">https://sanzo.top/blog/Blog/llm_inference/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>Sanzo</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2024-09-19</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2025-09-03</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/blog/tags/LLM/">LLM, </a><a class="link-muted" rel="tag" href="/blog/tags/Inference/">Inference </a></div></div><!--!--></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>Alipay</span><span class="qrcode"><img src="/blog/img/alipay.jpg" alt="Alipay"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>Wechat</span><span class="qrcode"><img src="/blog/img/wechat.jpg" alt="Wechat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/blog/Blog/easyconnect/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">使用Docker封印EasyConnect</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/blog/Blog/yabai/"><span class="level-item">yabai: macOS的窗口管理</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div class="content twikoo" id="twikoo"></div><script src="https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js"></script><script>twikoo.init({
+      envId: 'https://sanzo-blog.netlify.app/.netlify/functions/twikoo'
+    });</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/blog/img/sanzo.png" alt="Hao Yuan"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Hao Yuan</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Shenyang, China</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/blog/archives"><p class="title">16</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Category</p><a href="/blog/categories"><p class="title">1</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/blog/tags"><p class="title">27</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/Sanzo00" target="_blank" rel="noopener">Follow</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/Sanzo00"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Email" href="mailto:arrangeman@163.com"><i class="fa fa-envelope"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/blog/atom.xml"><i class="fas fa-rss"></i></a></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#FlashAttention"><span class="level-left"><span class="level-item">1</span><span class="level-item">FlashAttention</span></span></a></li><li><a class="level is-mobile" href="#PageAttention"><span class="level-left"><span class="level-item">2</span><span class="level-item">PageAttention</span></span></a></li><li><a class="level is-mobile" href="#RadixAttention"><span class="level-left"><span class="level-item">3</span><span class="level-item">RadixAttention</span></span></a></li><li><a class="level is-mobile" href="#RingAttention"><span class="level-left"><span class="level-item">4</span><span class="level-item">RingAttention</span></span></a></li><li><a class="level is-mobile" href="#RAGCache-Arxiv24"><span class="level-left"><span class="level-item">5</span><span class="level-item">RAGCache [Arxiv24]</span></span></a></li><li><a class="level is-mobile" href="#Cache-Craft-SIGMOD25"><span class="level-left"><span class="level-item">6</span><span class="level-item">Cache-Craft [SIGMOD25]</span></span></a></li><li><a class="level is-mobile" href="#CacheBlend-EuroSys25"><span class="level-left"><span class="level-item">7</span><span class="level-item">CacheBlend [EuroSys25]</span></span></a></li><li><a class="level is-mobile" href="#Superposition-ICLR24"><span class="level-left"><span class="level-item">8</span><span class="level-item">Superposition [ICLR24]</span></span></a></li><li><a class="level is-mobile" href="#AquaPipe-SIGMOD25"><span class="level-left"><span class="level-item">9</span><span class="level-item">AquaPipe [SIGMOD25]</span></span></a></li><li><a class="level is-mobile" href="#Similarity-based-Retrieval"><span class="level-left"><span class="level-item">10</span><span class="level-item">Similarity-based Retrieval</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#RetrievalAttention-Arxiv24"><span class="level-left"><span class="level-item">10.1</span><span class="level-item">RetrievalAttention [Arxiv24]</span></span></a></li><li><a class="level is-mobile" href="#RetroInfer-Arxiv25"><span class="level-left"><span class="level-item">10.2</span><span class="level-item">RetroInfer [Arxiv25]</span></span></a></li><li><a class="level is-mobile" href="#PQCache-SIGMOD25"><span class="level-left"><span class="level-item">10.3</span><span class="level-item">PQCache [SIGMOD25]</span></span></a></li></ul></li><li><a class="level is-mobile" href="#Apt-Serve-SIGMOD25"><span class="level-left"><span class="level-item">11</span><span class="level-item">Apt-Serve [SIGMOD25]</span></span></a></li><li><a class="level is-mobile" href="#Scheduling"><span class="level-left"><span class="level-item">12</span><span class="level-item">Scheduling</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#Parrot-OSDI24"><span class="level-left"><span class="level-item">12.1</span><span class="level-item">Parrot [OSDI24]</span></span></a></li><li><a class="level is-mobile" href="#Preble-ICLR25"><span class="level-left"><span class="level-item">12.2</span><span class="level-item">Preble [ICLR25]</span></span></a></li><li><a class="level is-mobile" href="#TaiChi-Arxiv25"><span class="level-left"><span class="level-item">12.3</span><span class="level-item">TaiChi [Arxiv25]</span></span></a></li></ul></li><li><a class="level is-mobile" href="#Agent"><span class="level-left"><span class="level-item">13</span><span class="level-item">Agent</span></span></a></li><li><a class="level is-mobile" href="#Sparse-Attention-Long-context"><span class="level-left"><span class="level-item">14</span><span class="level-item">Sparse Attention/Long context</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#LM-infinite"><span class="level-left"><span class="level-item">14.1</span><span class="level-item">LM-infinite</span></span></a></li><li><a class="level is-mobile" href="#Longformer-Arxiv20"><span class="level-left"><span class="level-item">14.2</span><span class="level-item">Longformer [Arxiv20]</span></span></a></li><li><a class="level is-mobile" href="#StreamingLLM-ICLR24"><span class="level-left"><span class="level-item">14.3</span><span class="level-item">StreamingLLM [ICLR24]</span></span></a></li></ul></li><li><a class="level is-mobile" href="#Training"><span class="level-left"><span class="level-item">15</span><span class="level-item">Training</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#MEMO-SIGMOD25"><span class="level-left"><span class="level-item">15.1</span><span class="level-item">MEMO [SIGMOD25]</span></span></a></li><li><a class="level is-mobile" href="#Malleus-SIGMOD25"><span class="level-left"><span class="level-item">15.2</span><span class="level-item">Malleus [SIGMOD25]</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/blog/js/toc.js" defer></script></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">Categories</h3><ul class="menu-list"><li><a class="level is-mobile" href="/blog/categories/Blog/"><span class="level-start"><span class="level-item">Blog</span></span><span class="level-end"><span class="level-item tag">15</span></span></a></li></ul></div></div></div><div class="card widget" data-type="subscribe-email"><div class="card-content"><div class="menu"><h3 class="menu-label">follow.it</h3><form action="https://api.follow.it/subscription-form/VkdEYjJIYUJXc3NWWEUrcTRQVzhYN2hxYVpHZDBOWlNTZDhBWW1TbmtmUkVKNDlobzZwMFVuY2ZKYXliT1BJTEtIV0NNaVY0bnVPTXJxVURJOEMyUWNTVndTc3ZEQXAwUndERG43bjB6RnVCOUxtVGVOTkVtWUlVZS9yVlNhZW18QTVaT1plUWxrNkt6b2tuYlFWdmFLN2pUOHBZeHB6VytMU0JEUFJwTFlhdz0=/8" method="post" target="_blank"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button" type="submit" value="Subscribe"></div></div></form></div></div></div><div class="column-right-shadow is-hidden-widescreen"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-10-03T02:40:48.000Z">2024-10-03</time></p><p class="title"><a href="/blog/Blog/easyconnect/">使用Docker封印EasyConnect</a></p><p class="categories"><a href="/blog/categories/Blog/">Blog</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-09-19T08:38:06.000Z">2024-09-19</time></p><p class="title"><a href="/blog/Blog/llm_inference/">LLM推理服务论文</a></p><p class="categories"><a href="/blog/categories/Blog/">Blog</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-07-14T07:25:56.000Z">2024-07-14</time></p><p class="title"><a href="/blog/Blog/yabai/">yabai: macOS的窗口管理</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-04-02T11:23:09.000Z">2024-04-02</time></p><p class="title"><a href="/blog/Blog/continue/">VSCode插件: Continue</a></p><p class="categories"><a href="/blog/categories/Blog/">Blog</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-02-28T00:06:50.000Z">2024-02-28</time></p><p class="title"><a href="/blog/Blog/rag/">RAG介绍</a></p><p class="categories"><a href="/blog/categories/Blog/">Blog</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">Archives</h3><ul class="menu-list"><li><a class="level is-mobile" href="/blog/archives/2024/10/"><span class="level-start"><span class="level-item">October 2024</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/blog/archives/2024/09/"><span class="level-start"><span class="level-item">September 2024</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/blog/archives/2024/07/"><span class="level-start"><span class="level-item">July 2024</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/blog/archives/2024/04/"><span class="level-start"><span class="level-item">April 2024</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/blog/archives/2024/02/"><span class="level-start"><span class="level-item">February 2024</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/blog/archives/2022/05/"><span class="level-start"><span class="level-item">May 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/blog/archives/2022/03/"><span class="level-start"><span class="level-item">March 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/blog/archives/2021/10/"><span class="level-start"><span class="level-item">October 2021</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/blog/archives/2021/07/"><span class="level-start"><span class="level-item">July 2021</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/blog/archives/2021/06/"><span class="level-start"><span class="level-item">June 2021</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">Tags</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/blog/tags/EasyConnect/"><span class="tag">EasyConnect</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/Inference/"><span class="tag">Inference</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/LLM/"><span class="tag">LLM</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/ML/"><span class="tag">ML</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/RAG/"><span class="tag">RAG</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/RaspberryPi/"><span class="tag">RaspberryPi</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/car/"><span class="tag">car</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/cmake/"><span class="tag">cmake</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/command/"><span class="tag">command</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/continue/"><span class="tag">continue</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/git/"><span class="tag">git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/linear-algebra/"><span class="tag">linear algebra</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/linux/"><span class="tag">linux</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/math/"><span class="tag">math</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/miniconda/"><span class="tag">miniconda</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/ollama/"><span class="tag">ollama</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/pi/"><span class="tag">pi</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/python/"><span class="tag">python</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/pytorch/"><span class="tag">pytorch</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/samba/"><span class="tag">samba</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/school/"><span class="tag">school</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/setup/"><span class="tag">setup</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/ubuntu/"><span class="tag">ubuntu</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/v2ray/"><span class="tag">v2ray</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/venv/"><span class="tag">venv</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/vpn/"><span class="tag">vpn</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/blog/tags/zsh/"><span class="tag">zsh</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/blog/"><img src="/blog/img/sanzo.png" alt="Sanzo Blog" height="28"></a><p class="is-size-7"><span>&copy; 2025 Sanzo</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p><p class="is-size-7">© 2024</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/blog/js/column.js"></script><script src="/blog/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/blog/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/mhchem.min.js" defer></script><script>window.addEventListener("load", function() {
+            document.querySelectorAll('[role="article"] > .content').forEach(function(element) {
+                renderMathInElement(element);
+            });
+        });</script><script type="text/javascript" id="MathJax-script" async>MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      },
+      svg: {
+        fontCache: 'global'
+      },
+      chtml: {
+        matchFontHeight: false
+      }
+    };</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script><!--!--><!--!--><!--!--><script src="/blog/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script data-pjax src="/blog/js/insight.js" defer></script><script data-pjax>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/blog/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>
