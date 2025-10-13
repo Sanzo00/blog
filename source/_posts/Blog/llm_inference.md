@@ -361,11 +361,57 @@ PD-aggregation和PD-disaggregation适应不同的SLO，无法适用于TTFT和TPO
 
 
 
+### Ayo [ASPLOS25]
+
+Towards End-to-End Optimization of LLM-based  Applications with Ayo [[paper]](https://arxiv.org/pdf/2407.00326) [[code]](https://github.com/NetX-lab/Ayo) [[author]](https://txxx926.github.io)
+
+
+
+这篇工作关注LLM应用的端到端性能优化。首先提出了primitive-level dataflow graph对请求的工作流进行抽象。然后基于这个dataflow graph进行细粒度的调度和优化，例如并行化和流水线。与现有系统相比实现2.09X的加速。
+
+
+
+> 背景和动机
+
+我们与LLM交互发生了变化，从最初的chatbot到现在利用LLM完成复杂任务（例如：RAG，Agent等）。
+
+![常见的LLM应用执行流程。](/img/Blog/llm-inference/image-20251009165020869.png)
 
 
 
 
 
+在LLM应用中，非LLM操作（例如：数据检索，网络搜索，调用API，索引构建等）占据了大部分执行时间。这对LLM的推理加速提出了新的需求。
+
+![LLM应用每个模块的执行时间。](/img/Blog/llm-inference/image-20251009164727239.png)
+
+
+
+首先，现有LLM应用开发框架（Langchain，LLamaindex）以模块为粒度顺序调度，忽略了模块之间的依赖和计算特点，从而限制了对复杂工作流的优化。
+
+
+
+![Workflow expression and execution comparison of existing schemes and Ayo. a) module-level workflow b) primitive-based dataflow graph in Ayo. c) Execution graph after optimization in Ayo.](/img/Blog/llm-inference/image-20251009165335996.png)
+
+
+
+
+
+其次，面向request-level优化的推理后端与用户感知的application-leve的性能之间的不匹配。
+
+例如，在对文档进行embedding，当bs=4时每个embedding latency最低，但是bs=16整体embedding module的latency最低；在对tree-based的文档进行总结时，由于后端不感知前端执行的依赖，固定bs和顺序调度是次优的。
+
+![Comparison between request-level and application-level scheduling and execution.](/img/Blog/llm-inference/image-20251009165347980.png)
+
+
+
+
+
+![System Overview of Ayo.](/img/Blog/llm-inference/image-20251009170908821.png)
+
+
+
+![Illustrative optimized e-graph of a query for advanced RAG-based document QA with a refine synthesis mode.](/img/Blog/llm-inference/image-20251009170809916.png)
 
 
 
