@@ -425,6 +425,116 @@ Towards End-to-End Optimization of LLM-based  Applications with Ayo [[paper]](ht
 
 
 
+## KV Cache Offloading
+
+
+
+### CacheAttention [ATC24]
+
+
+
+Cost-efficient large language model serving for multi-turn conversations with CachedAttention [[paper]](https://arxiv.org/pdf/2403.19708) [[author]](https://csbingao.github.io)
+
+
+
+
+
+
+
+### FlashGen [ASPLOS25]
+
+Accelerating LLM Serving for Multi-turn Dialogues  with Efficient Resource Management [[paper]](https://dl.acm.org/doi/pdf/10.1145/3676641.3716245) 
+
+
+
+
+
+### Strata [Arxiv25]
+
+Strata: Hierarchical Context Caching for Long Context Language Model Serving [[paper]](https://arxiv.org/pdf/2508.18572) [[author]](https://github.com/xiezhq-hermann)
+
+这篇工作应该是作者在SGLang中实现分层KV Cache形成的一篇工作，[[sglang issue #2693]](https://github.com/sgl-project/sglang/pull/2693)。
+
+本文讨论了一个比较有意思的问题：LLM推理服务的“Delay Hit”问题，即多个请求具有相同的前缀，如果把这些请求打包在一起调度，会导致冗余计算。这个点在我之前的代码中也遇到过，和作者解决思路差不多，就是优先处理其中一个请求，推迟后续请求的调度。
+
+
+
+> 背景
+
+用户的请求通常具有相同的前缀（例如system promt，hot retrieve in RAG等）。利用这一特点，通过缓存请求的KV Cache我们可以有效减少冗余KV Cache计算。一方面随着模型上下文窗口的增加，每个请求的KV Cache越来越大，另一方面GPU有限的内存无法存储所有用户的请求。因此将KV Cache从GPU offload 到host momory和Disk是long-context LLM推理的普遍的做法。
+
+
+
+> 动机
+
+本文探讨了在offloading KV Cahce场景下的两个问题：
+
+1. KV Cache传输的带宽利用低。
+
+   为了解决LLM推理过程中内存碎片的问题， vLLM提出了分页管理KV Cache的技术，这也成了现有LLM推理框架的默认设置。为了保证内存的利用率和缓存命中率，页面大小通常比较小，例如TensorRT-LLM的 `page size =32`， vllm的 `page size = 16` ，SGLang的 `page size = 1`。然而这种小的page size对传输并不友好。
+
+   
+
+   作者测试了不同通信带宽下，从CPU到GPU加载KV Cache的延迟和带宽利用率。可以看到，在PCIe 5.0上带宽利用率仅为22%。在更高的互连带宽下，例如Grace-Hopper下，带宽利用率低于5%。
+
+   ![Latency and bandwidth utilization of loading KV caches of 8192 tokens (using page size 32) of Llama-3.1-8B from CPU to GPU on different platforms.](/img/Blog/llm-inference/image-20251014104905600.png)
+
+   
+
+   作者在分析传输带宽问题的思路可以借鉴下：首先根据李特尔法则（Little‘s Law），系统在稳定状态下的平均并发数量为 $C=\lambda \cdot L$，其中$\lambda$表示请求到达速率，$L$表示每个请求的平均延迟。此时吞吐量$X=\lambda \cdot S$，其中$S$表示每个请求的平均数据大小。合并上面两个公式， $X=C\cdot S/L$，因此增大并行I/O请求数量，使用更大的块大小和降低每次操作的延迟（使用更快的存储介质）可以提高系统的吞吐量。
+
+
+
+2. KV Cache延迟命中问题
+
+   在计算机网络缓存中，延迟命中（delay hit phenomenon）是指：当一个请求发生cache miss时，请求从后端服务加载对象。如果在这个缓存miss还没完成时，又有多个请求访问同一个对象，这些请求不能立即命中，只能排队等待第一个miss被填充。
+
+   在LLM推理中也存在相同的问题，例如，在高并发的请求中，多个请求具有相同的前缀，当这些请求被打包为一个batch时，就会存在冗余计算。一些推理框架（SGLang，NanoFlow）采用异步调度batch的方法，即推对一个batch请求计算的同时，异步的构建下一个batch，来减少调度对推理性能的影响。在这种情况下， 如果下个batch和上个batch存在前缀共享，那么延迟命中的问题就会被进一步放大。
+
+
+
+> 解决方案
+
+1. GPU-assisted I/O实现高效的读写
+
+   GPU辅助I/O具有以下好处：1）GPU具有大量线程，可以同时发出大量读写操作来打满带宽；2）GPU-assisted I/O的读写粒度通常为128字节，比较适合单个page（千字节）的传输。3）利用轻量级I/O内核来实现灵活的内存layout转换。
+
+   然而，使用GPU-assisted I/O会和计算任务（prefill，decode）抢计算资源。作者对比了使用不同数量的block来做I/O kernel下系统的吞吐变化。发现当block = 1或2时，对计算的影响是可以接受的（5%）。因此对于从CPU加载KV Cache使用block = 2（critical path），GPU写CPU使用block = 1（non-critical path）。
+
+   ![Performance interference vs. resources allocated to the KV-cache I/O kernel. Measurement on concurrently running Strata ’s I/O kernel with a prefill pass (batch of two requests with 4k input each) and a decode pass (batch of 16 requests with 4k input each), respectively.](/img/Blog/llm-inference/image-20251014104836885.png)
+
+
+
+
+
+2. Cache Aware Scheduling
+
+   - Deferral on Delay Hit：通过为请求进行标记来缓解“延迟命中”的问题。节点状态分为`in-queue`和`in-flight`。被调度的请求涉及的token首先被标记为`in-queue`，后续命中`in-queue`的请求将被推迟。当请求执行的时候，节点状态从`in-queue`切换到`in-flight`。作者设置阈值，只有超过一定数量的节点被命中（100个），才会被推迟调度。
+
+     如图所示，A1和A0具有相同的前缀，A0被调度的时候，前缀节点被标记为 `in-queue`，因此A1会被延迟调度。
+
+   - Balance Batch Formation：当调度的请求都需要从CPU加载KV Cache会引发loading stall（例如，同时调度C和D0）。此外将具有相同前缀的请求打包在一个batch中可以减少内存占用和冗余计算，本文将这种请求称为"bundle hit"。
+
+     balance batch通过设置阈值（load/compute = 100）来对请求进行调度，当加入请求满足loading bound限制，将被添加到batch中，随后对所有候选请求执行bundle hit检测，将具有相同前缀的请求加入到batch中。如果请求超过loading bound将被放到一个低优先级的队列，当调度完成之后，batch没有被填满再将这些loading比较重的请求放入队列中。
+
+   - Hide Loading Stall with Bubble Filing：但不可避免发生loading stall时，本文通过将loading和decoding overlap来尽可能隐藏loading的开销。
+
+   
+
+   ![Figure 7. Scheduling Policies of Strata, where orange blocks indicate prefill batches experiencing cache miss, green indicates cache hit on device, purple indicates cache hit on host memory, blue indicates data transfer, and the one decoding batch is colored in gray.](/img/Blog/llm-inference/image-20251014105731387.png)
+
+
+
+
+
+
+
+
+
+​		
+
+
+
 ## Sparse Attention/Long context
 
 
