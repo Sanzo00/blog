@@ -447,6 +447,62 @@ Accelerating LLM Serving for Multi-turn Dialogues  with Efficient Resource Manag
 
 
 
+这片论文探讨了LLM推理服务在多轮对话场景下对计算和存储资源管理。
+
+看完最大的收获是：本文讨论了队头阻塞导致的GPU内存资源利用率低的问题，虽然解决方法比较简单，但是确实没有在其他论文看到过；
+
+本文的写作也值得学习，问题motivate的很清晰（分层缓存和请求调度问题），技术（Flash-Cache，Flash-Sched）也和两个问题一一对应。
+
+
+
+> 动机
+
+多轮对话也属于long-context 问题， 随着对话轮数的增加，prompt的长度显著上升，即prompt amplification problem。有限的GPU内存无法缓存所有对话的KV Cache，因此需要利用host memory，Disk来缓解KV Cache的存储压力。
+
+
+
+此外，现有LLM推理服务采用FCFS来调度请求，当GPU剩余显存无法满足队首请求的需求，所有请求将被搁置，即使队列中有其他短请求可以执行。这就是队头阻塞导致的GPU资源利用低的问题。
+
+
+
+> 解决方案
+
+1. FlashGen-Cache：多层存储kv cache。
+
+   这里主要讨论了GPU和host memory，GPU和Disk之间的KV Cache保存和加载的问题。
+
+   核心的思路就是尽可能overlap计算和传输（overlap不了的话，就构造一些计算任务来overlap），以及采用proactive（inclusive）来主动备份KV Cache（GPU=>CPU, CPU=>Disk），利用host momory作为GPU和Disk的中转站（请求到达的时候，就主动的从Disk加载KV Cache到中转站）减少Disk数据加载延迟。
+
+   这些也是比较常用的方法，例如在RAGCache，CacheAttention也有类似的讨论。
+
+   
+
+2. FlashGen-Sched：通过请求重排序来高效利用GPU资源。
+
+   如下图所示，由于队头阻塞导致资源利用率低的问题，其中GPU的内存利用率平均为88%。
+
+   ![Figure 7. GPU (2 x A100-80GB) memory utilization while serving an OPT 30B model with the ShareGPT dataset](/img/Blog/llm-inference/image-20251015083922269.png)
+
+   解决队头阻塞问题的方法比较直观：当发生队头阻塞的时候，贪心的执行下一个显存需求足够的请求。，当显存空间足够执行队头长请求（有其他请求完成），被提前调度的请求所占用的显存空间会被立即回收，用来执行队头长请求，防止Starvation问题。
+
+
+
+> 经验
+
+1. 为什么在缓存历史KV Cache不能高效利用GPU内存？
+
+   - 高请求负载下意味着更高的内存争用。
+
+   - 在多轮对话场景下（或者用户和agent交互下），用户会花一些时间用来理解输出和输入下一个问题。这对利用GPU缓存的时间局部性带来了挑战。
+
+2. 在实验中作者模拟了用户交互的时间，即在两个对话中间插入间隔时间。根据[1]，人类一分钟可以阅读300个单词，来估算每个token的时间 $1minute/300words=200ms$，间隔时间当前prompt长度+上一个输出token数量之和，然后乘以200ms。
+
+
+
+[1] Keith Rayner. 1978. Eye Movements in Reading and Information Processing.
+
+
+
 
 
 ### Strata [Arxiv25]
