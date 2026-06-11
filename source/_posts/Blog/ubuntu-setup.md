@@ -497,6 +497,233 @@ xrandr --output HDMI-1-0 --right-of HDMI-1 --auto
 
 
 
+
+
+## 服务器
+
+> 添加用户通知
+
+```bash
+sudo vim /etc/profile.d/user_notice.sh
+sudo chmod +x /etc/profile.d/user_notice.sh 
+```
+
+```bash
+#!/bin/bash
+
+# 只在交互式 shell 中生效，避免影响 scp/rsync/非交互命令
+case $- in
+    *i*) ;;
+    *) return ;;
+esac
+
+# --- 颜色定义 ---
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+CYAN='\033[0;36m'
+NC='\033[0m' # 无颜色
+
+# --- 代理命令 ---
+proxy_on () {
+  export http_proxy="http://127.0.0.1:7890"
+  export HTTP_PROXY="http://127.0.0.1:7890"
+  export https_proxy="http://127.0.0.1:7890"
+  export HTTPS_PROXY="http://127.0.0.1:7890"
+  export all_proxy="socks5://127.0.0.1:7891"
+  export ALL_PROXY="socks5://127.0.0.1:7891"
+  echo "Proxy ON"
+}
+
+proxy_off () {
+  unset http_proxy HTTP_PROXY
+  unset https_proxy HTTPS_PROXY
+  unset all_proxy ALL_PROXY
+  echo "Proxy OFF"
+}
+
+# --- 系统状态 ---
+get_cpu_usage() {
+  read cpu user nice system idle iowait irq softirq steal guest guest_nice < /proc/stat
+  idle1=$((idle + iowait))
+  total1=$((user + nice + system + idle + iowait + irq + softirq + steal))
+  sleep 0.2
+  read cpu user nice system idle iowait irq softirq steal guest guest_nice < /proc/stat
+  idle2=$((idle + iowait))
+  total2=$((user + nice + system + idle + iowait + irq + softirq + steal))
+
+  total_diff=$((total2 - total1))
+  idle_diff=$((idle2 - idle1))
+
+  if [ "$total_diff" -gt 0 ]; then
+    awk "BEGIN {printf \"%.1f%%\", (1 - $idle_diff / $total_diff) * 100}"
+  else
+    echo "N/A"
+  fi
+}
+
+CPU_USAGE=$(get_cpu_usage)
+LOAD_AVG=$(uptime | awk -F'load average:' '{print $2}' | sed 's/^ //')
+MEM_INFO=$(free -h | awk '/^Mem:/ {print $3 "/" $2}')
+MEM_USAGE=$(free -m | awk '/^Mem:/ {printf "%.1f%%", $3/$2*100}')
+
+# --- 常用命令 ---
+alias Hi="source /etc/profile.d/user_notice.sh"
+
+# --- 用户基本信息 ---
+echo -e "${BLUE}================================================================${NC}"
+echo -e "${GREEN}欢迎登录系统, $USER!${NC}"
+echo -e "用户 ID : $(id -u)  |  所属组: $(groups | cut -d' ' -f1,2,3)..."
+echo -e "系统运行时间: $(uptime -p)"
+echo
+
+
+# --- 系统状态 ---
+echo -e "${BLUE}[ 系统状态 ]${NC}"
+echo -e "  - CPU 使用率: ${CYAN}${CPU_USAGE}${NC}  |  Load Avg:${CYAN}${LOAD_AVG}${NC}"
+echo -e "  - 内存使用: ${CYAN}${MEM_INFO}${NC} (${CYAN}${MEM_USAGE}${NC})"
+
+echo -e "  - 磁盘使用:"
+df -h -x tmpfs -x devtmpfs --output=source,size,used,avail,pcent,target \
+  | awk -v CYAN="$CYAN" -v NC="$NC" '
+    NR==1 {
+      printf "      %-24s %8s %8s %8s %8s %s\n", $1, $2, $3, $4, $5, $6
+      next
+    }
+    $6=="/" || $6 ~ /^\/home/ || $6 ~ /^\/data/ || $6 ~ /^\/mnt/ {
+      printf "      %-24s %8s %8s %8s %s%8s%s %s\n", $1, $2, $3, $4, CYAN, $5, NC, $6
+    }
+  '
+
+if command -v nvidia-smi >/dev/null 2>&1; then
+  GPU_INFO=$(timeout 2 nvidia-smi --query-gpu=index,name,utilization.gpu,memory.used,memory.total --format=csv,noheader,nounits 2>/dev/null)
+  if [ -n "$GPU_INFO" ]; then
+    echo -e "  - GPU 状态:"
+    echo "$GPU_INFO" | while IFS=',' read idx name util mem_used mem_total; do
+      echo -e "      ${CYAN}GPU ${idx}:${NC}${name} | Util: ${CYAN}${util}%${NC} | Mem: ${CYAN}${mem_used}/${mem_total} MiB${NC}"
+    done
+  fi
+else
+  echo -e "  - GPU 状态: ${CYAN}未检测到 nvidia-smi${NC}"
+fi
+
+echo
+
+# --- Tips ---
+echo -e "${GREEN}[ 使用提示 ]${NC}"
+echo -e "  - 系统配置了代理环境，可通过 ${GREEN}proxy_on${NC} 开启代理，${GREEN}proxy_off${NC} 关闭代理。"
+echo -e "  - 代理端口为 ${GREEN}7890${NC}，如需测试网络连通性，可执行："
+echo -e "      ${GREEN}curl -I https://www.google.com${NC}"
+echo -e "  - 输入 ${GREEN}Hi${NC} 可再次查看系统提示。"
+echo
+
+echo -e "${BLUE}[ 存储规范 ]${NC}"
+echo -e "  - 请注意磁盘空间管理，数据集、模型文件和 Python 环境建议放到以 ${YELLOW}/home/hdd${NC} 开头的磁盘。"
+echo -e "  - 避免在系统盘或家目录中存放大文件，以免影响系统稳定性。"
+echo
+
+echo -e "${YELLOW}[ 权限与审计 ]${NC}"
+echo -e "  - 如需使用 Docker 权限，请联系管理员添加。"
+echo -e "  - ${YELLOW}sudo 和 Docker 的所有操作都会被系统审计，请谨慎使用。${NC}"
+
+echo -e "${BLUE}================================================================${NC}"
+```
+
+
+
+> 配置zsh（可选）
+
+```bash
+# sudo vim /etc/zsh/zprofile
+
+if [[ -n "$SSH_CONNECTION" && -o interactive && -r /etc/profile.d/user_notice.sh ]]; then
+    source /etc/profile.d/user_notice.sh
+fi
+```
+
+
+
+> audit审计
+
+```bash
+# 安装audit
+sudo apt install auditd audispd-plugins -y
+
+sudo systemctl enable --now auditd
+
+# 添加下面sudo和docker的配置
+sudo vim /etc/audit/rules.d/common.rules
+
+# 加载规则
+sudo augenrules --load
+sudo auditctl -l | grep -E "sudo|docker"
+```
+
+sudo和docker配置:
+
+```bash
+# sudo
+-a always,exit -F arch=b64 -S execve -F path=/usr/bin/sudo -F perm=x -k sudo_exec
+-a always,exit -F arch=b32 -S execve -F path=/usr/bin/sudo -F perm=x -k sudo_exec
+
+
+# Docker
+# 审计 docker 命令执行
+-a always,exit -F arch=b64 -S execve -F path=/usr/bin/docker -F perm=x -k docker_cli
+-a always,exit -F arch=b32 -S execve -F path=/usr/bin/docker -F perm=x -k docker_cli
+
+# 审计 dockerd / containerd / runc 执行
+-w /usr/bin/dockerd -p x -k docker_daemon
+-w /usr/bin/containerd -p x -k docker_daemon
+-w /usr/bin/runc -p x -k docker_runtime
+
+# 审计 Docker 配置变更
+-w /etc/docker -p wa -k docker_config
+-w /etc/docker/daemon.json -p wa -k docker_config
+
+# 审计 Docker systemd 服务文件变更
+-w /lib/systemd/system/docker.service -p wa -k docker_service
+-w /lib/systemd/system/docker.socket -p wa -k docker_service
+-w /etc/systemd/system/docker.service.d -p wa -k docker_service
+
+# 审计 docker.sock 访问
+-w /var/run/docker.sock -p rwxa -k docker_sock
+-w /run/docker.sock -p rwxa -k docker_sock
+
+```
+
+
+
+audit常用命令
+
+```bash
+# 查命令
+sudo ausearch -c sudo -i
+sudo ausearch -c docker -i
+
+# 查docker
+sudo ausearch -k docker_cli -i
+
+# 查sudo执行
+sudo ausearch -m USER_CMD -i
+
+# 查用户认证
+sudo ausearch -m USER_AUTH -i
+
+# 查账号检查
+sudo ausearch -m USER_ACCT -i
+
+# 查用户
+sudo ausearch -ua yuanh -i
+```
+
+
+
+
+
+
+
 ## 其他
 
 [typora](https://typora.io/#linux)
