@@ -32,8 +32,8 @@ article:
     comments: 'Comments'
     read_time: '%s read'
     word_count:
-        one: 'About %d word'
-        other: 'About %d words'
+        one: '%d word'
+        other: '%d words'
     licensing:
         author: 'Author'
         created_at: 'Posted on'

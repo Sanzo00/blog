@@ -53,7 +53,7 @@ module.exports = class extends Component {
                             <a className="has-link-black-ter" href={url_for(page.link || page.path)}> {page.title}</a>:page.title
                         }
                     </h1>
-                    {page.layout !== 'page' ? <div class="article-meta is-size-7 is-uppercase level is-mobile">
+                    {page.layout !== 'page' ? <div class="article-meta is-size-7 level is-mobile">
                         <div class="level-left">
                             {/* Creation Date */}
                             {page.date && <span class="level-item">
@@ -88,7 +88,10 @@ module.exports = class extends Component {
                                 {(() => {
                                     const words = getWordCount(page._content);
                                     const time = moment.duration((words / 150.0) * 60, 'seconds');
-                                    return `${_p('article.read_time', time.locale(index ? indexLanguage : language).humanize())} (${_p('article.word_count', words)})`;
+                                    const humanizedReadTime = time.locale(index ? indexLanguage : language).humanize();
+                                    const readTime = humanizedReadTime === 'a few seconds' ? '1 minute' : humanizedReadTime.replace(/^(a|an) /, '1 ');
+                                    const wordCount = _p('article.word_count', words).replace(String(words), words.toLocaleString('en-US'));
+                                    return `${_p('article.read_time', readTime)} (${wordCount})`;
                                 })()}
                             </span> : null}
                             {/* Visitor counter */}
